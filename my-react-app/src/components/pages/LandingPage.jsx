@@ -1,406 +1,267 @@
 import Footer from "../organisms/Footer.jsx";
 import Navbar from "../organisms/Navbar.jsx";
 
-function LandingPage({ onNavigate, theme, onToggleTheme }) {
+function LandingPage({ onNavigate }) {
   return (
     <div className="relative overflow-hidden">
-      <div className="pointer-events-none absolute -left-20 top-24 h-72 w-72 rounded-full bg-[var(--orb-1)] opacity-50 blur-3xl" />
-      <div className="pointer-events-none absolute right-[-120px] top-10 h-96 w-96 rounded-full bg-[var(--orb-2)] opacity-30 blur-[120px]" />
+      <div className="pointer-events-none absolute -left-20 top-24 h-72 w-72 rounded-full bg-[var(--orb-1)] opacity-45 blur-3xl" />
+      <div className="pointer-events-none absolute right-[-120px] top-10 h-96 w-96 rounded-full bg-[var(--orb-2)] opacity-25 blur-[120px]" />
 
-      <Navbar
-        onNavigate={onNavigate}
-        theme={theme}
-        onToggleTheme={onToggleTheme}
-      />
+      <Navbar onNavigate={onNavigate} />
 
-      <main className="mx-auto flex min-h-screen w-full max-w-none flex-col gap-16 px-6 pb-24 pt-8">
-        <section className="grid items-center gap-10 md:grid-cols-[1.2fr_1fr]">
-          <div>
+      <main className="mx-auto flex min-h-screen w-full max-w-none flex-col gap-14 px-0 pb-24 pt-0">
+        <section id="home" className="relative min-h-screen w-full overflow-hidden bg-[var(--surface)]">
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage:
+                "linear-gradient(180deg, rgba(6,5,4,0.82) 0%, rgba(10,8,6,0.78) 55%, rgba(6,5,4,0.9) 100%), url('https://images.unsplash.com/photo-1503951458645-643d53bfd90f?auto=format&fit=crop&w=1600&q=80')",
+            }}
+          />
+          <div className="pointer-events-none absolute bottom-0 left-0 h-24 w-full bg-gradient-to-b from-transparent to-[#1a1b1f]" />
+          <div className="relative z-10 flex min-h-[70vh] flex-col items-center justify-center px-6 py-16 text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.4em] text-[var(--accent)]">
-              Appointments, elevated
+              Elite cuts
             </p>
-            <h1 className="font-display mt-4 text-4xl leading-tight text-[var(--ink)] md:text-5xl">
-              A premium booking experience for barbershops that value craft.
+            <h1 className="font-display mt-5 text-4xl leading-tight text-white sm:text-5xl md:text-6xl">
+              Look Sharp.
+              <br />
+              Feel Confident.
             </h1>
-            <p className="mt-6 text-base text-[var(--muted)]">
-              Replace messy spreadsheets with a refined, real-time system that
-              makes clients feel cared for and owners feel in control.
+            <p className="mt-6 max-w-2xl text-sm text-white/80 sm:text-base">
+              Premium men's grooming services delivered by master barbers in a modern,
+              masculine environment. Experience the art of the perfect cut.
             </p>
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <button
-                className="rounded-full bg-[var(--dark-surface)] px-6 py-3 text-sm font-semibold text-[var(--on-dark)] shadow-lg shadow-[#231f1a]/20 transition hover:-translate-y-0.5"
+                className="rounded-full bg-[var(--accent)] px-7 py-3 text-sm font-semibold text-[var(--on-dark)] shadow-lg shadow-[var(--accent)]/30 transition hover:-translate-y-0.5"
                 onClick={() => onNavigate("register")}
                 type="button"
               >
-                Start Free Setup
+                Sign Up
               </button>
               <button
-                className="rounded-full border border-[var(--border)] px-6 py-3 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-6 py-3 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
                 onClick={() => onNavigate("login")}
                 type="button"
               >
-                Existing Account
+                Login
               </button>
-            </div>
-          </div>
-
-          <div className="relative">
-            <div className="rounded-[32px] border border-[var(--border)] bg-[var(--surface)] p-6 shadow-[0_24px_60px_-28px_rgba(35,31,26,0.45)]">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.3em] text-[var(--accent)]">
-                    Today
-                  </p>
-                  <p className="font-display text-2xl text-[var(--ink)]">
-                    Saturday Schedule
-                  </p>
-                </div>
-                <span className="rounded-full bg-[var(--dark-surface)] px-3 py-1 text-xs text-[var(--on-dark)]">
-                  14 slots
-                </span>
-              </div>
-              <div className="mt-6 space-y-4">
-                {[
-                  {
-                    time: "09:00 AM",
-                    name: "Line-up & beard shape",
-                    status: "Confirmed",
-                  },
-                  {
-                    time: "11:30 AM",
-                    name: "Skin fade + design",
-                    status: "Pending",
-                  },
-                  {
-                    time: "03:15 PM",
-                    name: "Executive cut",
-                    status: "Walk-in",
-                  },
-                ].map((slot) => (
-                  <div
-                    key={slot.time}
-                    className="flex items-center justify-between rounded-2xl border border-[var(--border)] bg-[var(--surface-2)] px-4 py-3"
-                  >
-                    <div>
-                      <p className="text-sm font-semibold text-[var(--ink)]">
-                        {slot.time}
-                      </p>
-                      <p className="text-xs text-[var(--muted-2)]">{slot.name}</p>
-                    </div>
-                    <span className="rounded-full bg-[var(--chip-bg)] px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-[var(--chip-text)]">
-                      {slot.status}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="absolute -bottom-8 -left-6 rounded-3xl bg-[var(--dark-surface)] px-6 py-4 text-[var(--on-dark)] shadow-xl">
-              <p className="text-xs uppercase tracking-[0.3em] text-[#d8c7b4]">
-                Conversion
-              </p>
-              <p className="font-display text-3xl">+28%</p>
             </div>
           </div>
         </section>
 
-        <section className="grid gap-8 rounded-[32px] border border-[var(--border)] bg-gradient-to-br from-[#1f1b16] via-[#251f19] to-[#2f261e] px-8 py-10 text-[var(--on-dark)] md:grid-cols-[1.2fr_1fr]">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.4em] text-[#e0c7ad]">
-              Precision booking
-            </p>
-            <h2 className="font-display mt-4 text-3xl leading-tight md:text-4xl">
-              Precision grooming, powered by intelligence.
+        <section className="w-full bg-[#1a1b1f] px-6 py-20">
+          <div className="mx-auto flex w-full max-w-6xl flex-col items-center text-center">
+            <h2 className="font-display text-3xl text-white md:text-4xl">
+              Our Services
             </h2>
-            <p className="mt-4 text-sm text-[#d8c7b4]">
-              Discover the right chair, the right service, and the right moment
-              with curated recommendations.
+            <p className="mt-3 text-sm text-white/70">
+              Expert grooming services tailored to the modern gentleman
             </p>
-            <div className="mt-6 flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.3em] text-[#d8c7b4]">
-              {["MANICAVE", "URBAN_CUT", "PRESTIGE", "GENTLEMEN", "ROYAL_BLADE"].map(
-                (label) => (
-                  <span key={label} className="rounded-full border border-white/10 px-3 py-1">
-                    {label}
-                  </span>
-                )
-              )}
+            <div className="mt-12 grid w-full gap-6 md:grid-cols-4">
+              {[
+                { title: "Premium Haircut", price: "$35", icon: "✂️" },
+                { title: "Beard Trim & Style", price: "$25", icon: "✨" },
+                { title: "Skin Fade", price: "$40", icon: "🎖️" },
+                { title: "Hot Towel Shave", price: "$30", icon: "🪒" },
+              ].map((service) => (
+                <div
+                  key={service.title}
+                  className="rounded-2xl border border-white/10 bg-[#23252b] p-6 text-left shadow-[0_20px_40px_-30px_rgba(0,0,0,0.6)]"
+                >
+                  <div className="text-2xl text-[var(--accent)]">
+                    {service.icon}
+                  </div>
+                  <p className="mt-4 text-sm font-semibold text-white">
+                    {service.title}
+                  </p>
+                  <p className="mt-2 text-sm font-semibold text-[var(--accent)]">
+                    {service.price}
+                  </p>
+                </div>
+              ))}
+            </div>
+            <button
+              className="mt-10 rounded-full border border-[var(--accent)] px-6 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)] transition hover:bg-[var(--accent)] hover:text-[var(--on-dark)]"
+              type="button"
+            >
+              View All Services
+            </button>
+          </div>
+        </section>
+
+        <section id="about" className="w-full bg-[#14151a]">
+          <div
+            className="relative h-56 w-full bg-cover bg-center"
+            style={{
+              backgroundImage:
+                "linear-gradient(180deg, rgba(6,5,4,0.7) 0%, rgba(6,5,4,0.9) 100%), url('https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=1600&q=80')",
+            }}
+          >
+            <div className="mx-auto flex h-full w-full max-w-6xl flex-col items-center justify-center px-6 text-center">
+              <h2 className="font-display text-3xl text-white md:text-4xl">
+                About Barbershop
+              </h2>
+              <p className="mt-2 text-sm text-white/70">
+                Where tradition meets modern style
+              </p>
             </div>
           </div>
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-            <p className="text-xs uppercase tracking-[0.3em] text-[#d8c7b4]">
-              Search a service
-            </p>
-            <div className="mt-4 grid gap-3 sm:grid-cols-[1fr_1fr_auto]">
-              <input
-                className="w-full rounded-2xl border border-white/10 bg-[#1a1511] px-4 py-3 text-sm text-[var(--on-dark)] outline-none placeholder:text-[#8f7d6b] focus:border-[#f7a23b] focus:ring-2 focus:ring-[#f7a23b]/30"
-                placeholder="Service or style"
-                type="text"
-              />
-              <input
-                className="w-full rounded-2xl border border-white/10 bg-[#1a1511] px-4 py-3 text-sm text-[var(--on-dark)] outline-none placeholder:text-[#8f7d6b] focus:border-[#f7a23b] focus:ring-2 focus:ring-[#f7a23b]/30"
-                placeholder="Zip code"
-                type="text"
-              />
-              <button
-                className="rounded-2xl bg-gradient-to-r from-[#c24c1a] via-[#e26a2c] to-[#f7a23b] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[#f7a23b]/30 transition hover:-translate-y-0.5"
-                type="button"
-              >
-                Search now
-              </button>
+          <div className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-16 md:grid-cols-[1.1fr_1fr]">
+            <div>
+              <h3 className="font-display text-2xl text-white">Our Story</h3>
+              <p className="mt-4 text-sm text-white/75">
+                Founded in 2026, Barbershop was born from a simple vision: to create a
+                premium grooming experience that honors traditional barbering while
+                embracing modern style and technique.
+              </p>
+              <p className="mt-4 text-sm text-white/75">
+                What started as a single chair operation has grown into a trusted
+                destination for men's grooming. Our success comes from attention to
+                detail, honest service, and a genuine love for the craft.
+              </p>
+              <p className="mt-4 text-sm text-white/75">
+                Every cut is tailored, every visit is personal, and every client is
+                treated with care and respect.
+              </p>
             </div>
-            <div className="mt-6 grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-2">
               {[
-                {
-                  title: "AI service layouts",
-                  copy: "Menu intelligence that boosts conversion and upsells.",
-                },
-                {
-                  title: "Dynamic staff scheduling",
-                  copy: "Balance chairs with real-time demand signals.",
-                },
-                {
-                  title: "Owner analytics",
-                  copy: "Revenue trends and return visits at a glance.",
-                },
-              ].map((feature) => (
+                "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1503951458645-643d53bfd90f?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1519744792095-2f2205e87b6f?auto=format&fit=crop&w=600&q=80",
+              ].map((src) => (
                 <div
-                  key={feature.title}
-                  className="rounded-2xl border border-white/10 bg-white/5 p-4"
+                  key={src}
+                  className="overflow-hidden rounded-2xl border border-white/10 bg-[#1c1d22]"
                 >
-                  <p className="text-sm font-semibold">{feature.title}</p>
-                  <p className="mt-2 text-xs text-[#d8c7b4]">{feature.copy}</p>
+                  <img
+                    alt="Barbershop"
+                    className="h-full w-full object-cover"
+                    src={src}
+                  />
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="grid gap-8">
-          <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
-            <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-[var(--accent)]">
-                Discover nearby
-              </p>
-              <h2 className="font-display mt-3 text-3xl text-[var(--ink)]">
-                Find your next premium cut
-              </h2>
-              <p className="mt-3 text-sm text-[var(--muted)]">
-                Browse categories, featured shops, and top-rated barbers in your
-                area.
-              </p>
-            </div>
-            <button
-              className="rounded-full border border-[var(--border)] px-5 py-2 text-xs font-semibold text-[var(--ink)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
-              type="button"
-            >
-              View all shops
-            </button>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {[
-              "Haircut",
-              "Beard trim",
-              "Hot shave",
-              "Fade",
-              "Coloring",
-            ].map((category) => (
-              <button
-                key={category}
-                className="rounded-2xl border border-[var(--border)] bg-[var(--surface-2)] px-4 py-3 text-sm font-semibold text-[var(--ink)] shadow-sm transition hover:-translate-y-0.5 hover:border-[var(--accent)]"
-                type="button"
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            {[
-              {
-                name: "The Crew’s Loft",
-                location: "Downtown · 0.7 mi",
-                rating: "4.9",
-              },
-              {
-                name: "Heritage Barbers",
-                location: "Old Market · 1.1 mi",
-                rating: "4.8",
-              },
-              {
-                name: "Urban Edge",
-                location: "Arts District · 1.4 mi",
-                rating: "4.7",
-              },
-            ].map((shop) => (
-              <div
-                key={shop.name}
-                className="rounded-[28px] border border-[var(--border)] bg-[var(--surface-2)] p-5 shadow-[0_16px_50px_-30px_rgba(35,31,26,0.35)]"
-              >
-                <div className="flex items-center justify-between">
-                  <p className="text-sm font-semibold text-[var(--ink)]">
-                    {shop.name}
-                  </p>
-                  <span className="rounded-full bg-[var(--dark-surface)] px-3 py-1 text-xs font-semibold text-white">
-                    {shop.rating}
-                  </span>
-                </div>
-                <p className="mt-2 text-xs text-[var(--muted-2)]">{shop.location}</p>
-                <button
-                  className="mt-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)] transition hover:text-[#8f471f]"
-                  type="button"
+        <section className="w-full bg-[#0f0f12] px-6 py-20">
+          <div className="mx-auto flex w-full max-w-6xl flex-col items-center text-center">
+            <h2 className="font-display text-3xl text-white md:text-4xl">
+              Our Values
+            </h2>
+            <p className="mt-3 text-sm text-white/70">
+              The principles that guide everything we do
+            </p>
+            <div className="mt-12 grid w-full gap-6 md:grid-cols-4">
+              {[
+                {
+                  title: "Excellence",
+                  copy: "We pursue perfection in every cut, delivering premium results.",
+                },
+                {
+                  title: "Community",
+                  copy: "More than a barbershop, we are a place for connection.",
+                },
+                {
+                  title: "Dedication",
+                  copy: "We master the craft and keep evolving with modern trends.",
+                },
+                {
+                  title: "Passion",
+                  copy: "Our love for barbering shows in every detail of our work.",
+                },
+              ].map((value) => (
+                <div
+                  key={value.title}
+                  className="rounded-2xl border border-white/10 bg-[#1c1d22] p-6 text-left shadow-[0_20px_40px_-30px_rgba(0,0,0,0.6)]"
                 >
-                  Book now
-                  <span aria-hidden="true">→</span>
-                </button>
-              </div>
-            ))}
-          </div>
-
-          <div className="grid gap-6 rounded-[28px] border border-[var(--border)] bg-[var(--surface)] p-6 md:grid-cols-[1fr_1.2fr]">
-            <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-[var(--accent)]">
-                Top-rated
-              </p>
-              <h3 className="font-display mt-3 text-2xl text-[var(--ink)]">
-                Barbers clients love
-              </h3>
-              <div className="mt-4 flex flex-wrap gap-3">
-                {["Miles H.", "Avery C.", "Dominic L.", "Renee G.", "Malik T."].map(
-                  (name) => (
-                    <span
-                      key={name}
-                      className="rounded-full border border-[var(--border)] bg-[var(--surface-2)] px-4 py-2 text-xs font-semibold text-[var(--ink)]"
-                    >
-                      {name}
-                    </span>
-                  )
-                )}
-              </div>
-            </div>
-            <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface-2)] p-5">
-              <p className="text-xs uppercase tracking-[0.3em] text-[var(--muted-2)]">
-                Recent reviews
-              </p>
-              <div className="mt-4 space-y-4">
-                {[
-                  {
-                    name: "James D.",
-                    review:
-                      "Clean studio, precise fade, and the booking flow was effortless.",
-                  },
-                  {
-                    name: "Marisol A.",
-                    review:
-                      "Great vibe and my stylist remembered every detail from last visit.",
-                  },
-                ].map((review) => (
-                  <div key={review.name} className="rounded-2xl bg-[#fdf3ea] p-4">
-                    <p className="text-sm font-semibold text-[var(--ink)]">
-                      {review.name}
-                    </p>
-                    <p className="mt-2 text-xs text-[var(--muted-2)]">
-                      {review.review}
-                    </p>
-                  </div>
-                ))}
-              </div>
+                  <p className="text-sm font-semibold text-white">{value.title}</p>
+                  <p className="mt-3 text-sm text-white/70">{value.copy}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        <section className="grid gap-6 md:grid-cols-2">
-          {[
-            {
-              title: "Book as a Client",
-              copy: "Pick a service, select your barber, and lock in a time in under 60 seconds.",
-              cta: "Book Appointment",
-              action: () => onNavigate("login"),
-            },
-            {
-              title: "Manage as an Owner",
-              copy: "See your entire day at a glance, balance walk-ins, and keep the team aligned.",
-              cta: "Owner Dashboard",
-              action: () => onNavigate("register"),
-            },
-          ].map((card) => (
-            <div
-              key={card.title}
-              className="group rounded-[28px] border border-[var(--border)] bg-gradient-to-br from-[var(--surface)] via-[var(--surface-2)] to-[var(--surface)] p-8 shadow-[0_20px_60px_-30px_rgba(35,31,26,0.45)] transition hover:-translate-y-1"
-            >
-              <p className="text-xs uppercase tracking-[0.3em] text-[var(--accent)]">
-                Option
-              </p>
-              <h3 className="font-display mt-4 text-2xl text-[var(--ink)]">
-                {card.title}
-              </h3>
-              <p className="mt-3 text-sm text-[var(--muted)]">{card.copy}</p>
+        <section className="w-full bg-[#111111] px-6 py-20">
+          <div className="mx-auto flex w-full max-w-6xl flex-col items-center text-center">
+            <h2 className="font-display text-3xl text-white md:text-4xl">
+              What Our Clients Say
+            </h2>
+            <div className="mt-12 grid w-full gap-6 md:grid-cols-3">
+              {[
+                {
+                  name: "Marcus Johnson",
+                  quote:
+                    "Best fade I've ever had. These guys are true professionals who take their time to get it perfect.",
+                },
+                {
+                  name: "David Chen",
+                  quote:
+                    "Clean environment, skilled barbers, and great conversation. My go-to spot for the past 2 years.",
+                },
+                {
+                  name: "James Wilson",
+                  quote:
+                    "Elite Cuts lives up to its name. The attention to detail is unmatched. Highly recommend!",
+                },
+              ].map((review) => (
+                <div
+                  key={review.name}
+                  className="rounded-2xl border border-white/10 bg-[#1c1d22] p-6 text-left shadow-[0_20px_40px_-30px_rgba(0,0,0,0.6)]"
+                >
+                  <div className="text-[var(--accent)]">★★★★★</div>
+                  <p className="mt-4 text-sm text-white/80">"{review.quote}"</p>
+                  <p className="mt-6 text-sm font-semibold text-white">
+                    {review.name}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="w-full bg-[#1b1c20] px-6 py-20">
+          <div className="mx-auto grid w-full max-w-6xl items-center gap-10 md:grid-cols-[1.1fr_1fr]">
+            <div className="text-left">
+              <h2 className="font-display text-3xl text-white md:text-4xl">
+                Visit Us Today
+              </h2>
+              <div className="mt-6 space-y-6 text-sm text-white/70">
+                <div>
+                  <p className="font-semibold text-white">Opening Hours</p>
+                  <p className="mt-2">Monday - Friday: 9:00 AM - 8:00 PM</p>
+                  <p>Saturday: 9:00 AM - 6:00 PM</p>
+                  <p>Sunday: 10:00 AM - 5:00 PM</p>
+                </div>
+                <div>
+                  <p className="font-semibold text-white">Location</p>
+                  <p className="mt-2">New Mens Hair Saloon</p>
+                  <p>Prem Nagar, Kila Gate Road</p>
+                  <p>Gwalior, Madhya Pradesh 474002</p>
+                </div>
+              </div>
               <button
-                className="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--dark-surface)] px-5 py-2 text-sm font-semibold text-[var(--on-dark)] transition group-hover:translate-x-1"
-                onClick={card.action}
+                className="mt-8 rounded-full bg-[var(--accent)] px-6 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--on-dark)] shadow-lg shadow-[var(--accent)]/30"
                 type="button"
               >
-                {card.cta}
-                <span aria-hidden="true">→</span>
+                Get Directions
               </button>
             </div>
-          ))}
-        </section>
-
-        <section className="grid gap-8 md:grid-cols-3">
-          {[
-            {
-              title: "Signature Services",
-              copy: "Curated menus, add-ons, and timing rules that keep your calendar profitable.",
-            },
-            {
-              title: "Smart Reminders",
-              copy: "SMS and email nudges cut no-shows and keep your shop running smooth.",
-            },
-            {
-              title: "Team Visibility",
-              copy: "Assign chairs, rotate walk-ins, and keep every stylist in sync.",
-            },
-          ].map((item) => (
-            <div
-              key={item.title}
-              className="rounded-3xl border border-[var(--border)] bg-[var(--surface-2)] p-6 backdrop-blur"
-            >
-              <h4 className="font-display text-xl text-[var(--ink)]">
-                {item.title}
-              </h4>
-              <p className="mt-3 text-sm text-[var(--muted-2)]">{item.copy}</p>
+            <div className="w-full overflow-hidden rounded-2xl border border-white/10 bg-[#23252b] p-2 shadow-[0_24px_60px_-35px_rgba(0,0,0,0.8)]">
+              <iframe
+                title="Elite Cuts Location"
+                className="h-[280px] w-full rounded-xl md:h-[320px]"
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=New%20Mens%20Hair%20Saloon%2C%20Prem%20Nagar%2C%20Kila%20Gate%20Road%2C%20Gwalior%2C%20Madhya%20Pradesh%20474002&z=16&output=embed"
+              />
             </div>
-          ))}
-        </section>
-
-        <section className="grid gap-8 rounded-[32px] bg-[var(--dark-surface)] px-8 py-12 text-[var(--on-dark)] md:grid-cols-[1.3fr_1fr]">
-          <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-[#d8c7b4]">
-              Client love
-            </p>
-            <h3 className="font-display mt-4 text-3xl">
-              “We look like a premium studio now.”
-            </h3>
-            <p className="mt-4 text-sm text-[#d8c7b4]">
-              The team at Studio North saw booking revenue grow 22% in three
-              months after switching to BarberBook.
-            </p>
-          </div>
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-            <p className="text-sm uppercase tracking-[0.3em] text-[#d8c7b4]">
-              Avg. rating
-            </p>
-            <p className="mt-3 text-4xl font-semibold">4.9</p>
-            <p className="mt-4 text-xs text-[#d8c7b4]">
-              Based on 1,284 client reviews
-            </p>
-            <button
-              className="mt-6 rounded-full bg-[#f7f2ec] px-4 py-2 text-xs font-semibold text-[var(--ink)]"
-              onClick={() => onNavigate("register")}
-              type="button"
-            >
-              Get Started Today
-            </button>
           </div>
         </section>
       </main>
@@ -411,6 +272,3 @@ function LandingPage({ onNavigate, theme, onToggleTheme }) {
 }
 
 export default LandingPage;
-
-
-

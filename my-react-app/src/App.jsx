@@ -11,15 +11,10 @@ const ROUTES = {
 
 function App() {
   const [route, setRoute] = useState(ROUTES.landing);
-  const [theme, setTheme] = useState(() => {
-    const saved = window.localStorage.getItem("theme");
-    return saved === "dark" ? "dark" : "light";
-  });
 
   useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-    window.localStorage.setItem("theme", theme);
-  }, [theme]);
+    document.documentElement.dataset.theme = "dark";
+  }, []);
 
   const handleNavigate = (next) => {
     if (ROUTES[next]) setRoute(next);
@@ -33,17 +28,9 @@ function App() {
         return <RegisterPage onNavigate={handleNavigate} />;
       case ROUTES.landing:
       default:
-        return (
-          <LandingPage
-            onNavigate={handleNavigate}
-            theme={theme}
-            onToggleTheme={() =>
-              setTheme((current) => (current === "dark" ? "light" : "dark"))
-            }
-          />
-        );
+        return <LandingPage onNavigate={handleNavigate} />;
     }
-  }, [route, theme]);
+  }, [route]);
 
   return (
     <div className="min-h-screen bg-[var(--page-bg)] text-[var(--page-text)]">
