@@ -1,12 +1,12 @@
 function Footer() {
   return (
     <footer
-      className="border-t border-white/5"
+      className="border-t border-[var(--border)]"
       style={{ background: "var(--footer-bg)" }}
     >
       <div className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-14 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
-          <p className="font-display text-2xl text-[var(--on-dark)]">
+          <p className="font-display text-2xl text-[var(--ink)]">
             BarberBook
           </p>
           <p className="mt-3 text-sm text-[var(--footer-text)]">
@@ -17,7 +17,7 @@ function Footer() {
             {["Clean", "Modern", "Reliable"].map((tag) => (
               <span
                 key={tag}
-                className="rounded-full border border-white/10 px-3 py-1"
+                className="rounded-full border border-[var(--border)] bg-white/60 px-3 py-1"
               >
                 {tag}
               </span>
@@ -25,7 +25,7 @@ function Footer() {
           </div>
         </div>
         <div className="text-sm text-[var(--footer-text)]">
-          <p className="font-semibold uppercase tracking-[0.2em] text-[var(--on-dark)]">
+          <p className="font-semibold uppercase tracking-[0.2em] text-[var(--ink)]">
             Explore
           </p>
           <div className="mt-4 space-y-2">
@@ -35,7 +35,7 @@ function Footer() {
           </div>
         </div>
         <div className="text-sm text-[var(--footer-text)]">
-          <p className="font-semibold uppercase tracking-[0.2em] text-[var(--on-dark)]">
+          <p className="font-semibold uppercase tracking-[0.2em] text-[var(--ink)]">
             For Shops
           </p>
           <div className="mt-4 space-y-2">
@@ -45,7 +45,7 @@ function Footer() {
           </div>
         </div>
         <div className="text-sm text-[var(--footer-text)]">
-          <p className="font-semibold uppercase tracking-[0.2em] text-[var(--on-dark)]">
+          <p className="font-semibold uppercase tracking-[0.2em] text-[var(--ink)]">
             Support
           </p>
           <div className="mt-4 space-y-2">
@@ -55,7 +55,7 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className="border-t border-white/10 py-4 text-center text-xs text-[var(--footer-text)]">
+      <div className="border-t border-[var(--border)] py-4 text-center text-xs text-[var(--footer-text)]">
         &copy; 2026 BarberBook. All rights reserved.
       </div>
     </footer>
