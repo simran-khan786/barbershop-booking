@@ -1,4 +1,39 @@
-﻿function LoginPage({ onNavigate }) {
+﻿import { useState } from "react";
+
+function LoginPage({ onNavigate }) {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const res = await fetch("http://localhost:8080/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email,
+          password
+        })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert("Login Successful ✅");
+        localStorage.setItem("token", data.token);
+        onNavigate("home");
+      } else {
+        alert(data);
+      }
+
+    } catch (err) {
+      console.error(err);
+      alert("Server Error ❌");
+    }
+  };
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#0f0f12]">
       <div className="pointer-events-none absolute -left-16 top-28 h-64 w-64 rounded-full bg-[#2a1c12] opacity-45 blur-3xl" />
@@ -33,83 +68,64 @@
             <p className="mt-4 text-sm text-white/70 md:text-base">
               Enter your email and password to continue.
             </p>
+
             <div className="mt-8 rounded-[28px] border border-white/10 bg-[#1c1d22] p-6 text-left shadow-[0_24px_60px_-30px_rgba(0,0,0,0.6)] md:p-8">
-              <form className="space-y-4">
+              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+
                 <div>
                   <label className="text-xs uppercase tracking-[0.2em] text-white/60">
                     Email address
                   </label>
                   <input
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="mt-2 w-full rounded-xl border border-white/10 bg-[#111111] px-4 py-3 text-sm text-white outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 placeholder:text-white/40"
                     placeholder="you@barberbook.com"
                     type="email"
                   />
                 </div>
+
                 <div>
                   <label className="text-xs uppercase tracking-[0.2em] text-white/60">
                     Password
                   </label>
                   <input
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     className="mt-2 w-full rounded-xl border border-white/10 bg-[#111111] px-4 py-3 text-sm text-white outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 placeholder:text-white/40"
                     placeholder="********"
                     type="password"
                   />
                 </div>
+
                 <div className="text-right">
                   <a
                     className="text-xs font-semibold text-[var(--accent)] transition hover:text-[#f7a23b]"
-                    href="https://accounts.google.com/"
-                    rel="noreferrer"
-                    target="_blank"
+                    href="#"
                   >
                     Forgot password?
                   </a>
                 </div>
+
                 <div className="flex items-center justify-between text-xs text-white/60">
                   <label className="flex items-center gap-2">
                     <input className="h-4 w-4 accent-[var(--accent)]" type="checkbox" />
                     Remember this device
                   </label>
-                  <button
-                    className="font-semibold text-[var(--accent)] transition hover:text-[#f7a23b]"
-                    type="button"
-                  >
-                    Need help?
-                  </button>
                 </div>
+
                 <button
+                  onClick={handleLogin}
                   className="w-full rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[var(--on-dark)] shadow-lg shadow-[var(--accent)]/30 transition hover:-translate-y-0.5"
                   type="button"
                 >
                   Log In
                 </button>
+
                 <p className="text-center text-[11px] text-white/60">
                   By continuing, you agree to our studio terms and privacy policy.
                 </p>
-                <div className="flex items-center gap-3">
-                  <a
-                    className="flex w-full items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-2 text-xs font-semibold text-white/80 transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
-                    href="https://accounts.google.com/"
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 text-sm">
-                      G
-                    </span>
-                    Continue with Google
-                  </a>
-                  <a
-                    className="flex w-full items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-2 text-xs font-semibold text-white/80 transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
-                    href="https://www.facebook.com/"
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 text-sm">
-                      f
-                    </span>
-                    Continue with Facebook
-                  </a>
-                </div>
+
               </form>
             </div>
           </div>
