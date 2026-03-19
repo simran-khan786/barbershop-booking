@@ -12,39 +12,40 @@ function RegisterPage({ onNavigate }) {
 
   const handleRegister = async () => {
 
-    if (password !== confirmPassword) {
-      alert("Passwords do not match ❌");
-      return;
+  if (password !== confirmPassword) {
+    alert("Passwords do not match ❌");
+    return;
+  }
+
+  try {
+    const res = await fetch("http://localhost:8080/api/auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        email,
+        password,
+        role: role.toUpperCase() // ✅ IMPORTANT FIX
+      })
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      alert("Registered Successfully ✅");
+      onNavigate("login");
+    } else {
+      alert(data);
     }
 
-    try {
-      const res = await fetch("http://localhost:8080/api/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          email,
-          password
-        })
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        alert("Registered Successfully ✅");
-        onNavigate("login");
-      } else {
-        alert(data);
-      }
-
-    } catch (err) {
-      console.error(err);
-      alert("Server Error ❌");
-    }
-  };
+  } catch (err) {
+    console.error(err);
+    alert("Server Error ❌");
+  }
+};
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#0f0f12]">

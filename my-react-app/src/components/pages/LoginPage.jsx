@@ -4,35 +4,97 @@ function LoginPage({ onNavigate }) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
+  // ✅ LOGIN
   const handleLogin = async () => {
+    if (!email || !password) {
+      alert("Please fill all fields ❌");
+      return;
+    }
+
     try {
+      setLoading(true);
+
       const res = await fetch("http://localhost:8080/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-          email,
-          password
-        })
+        body: JSON.stringify({ email, password })
       });
 
       const data = await res.json();
 
       if (res.ok) {
-        alert("Login Successful ✅");
-        localStorage.setItem("token", data.token);
-        onNavigate("home");
+  alert("Login Successful ✅");
+
+  if (data?.token) {
+    localStorage.setItem("token", data.token);
+  }
+
+  // ✅ SAVE ROLE
+  if (data?.role) {
+    localStorage.setItem("role", data.role);
+  }
+
+  // ✅ ROLE BASED REDIRECT
+  if (data.role === "OWNER") {
+    onNavigate("owner");
+  } else {
+    onNavigate("home");
+  }
+
+        
+
       } else {
-        alert(data);
+        alert(data?.message || data || "Login failed ❌");
       }
 
     } catch (err) {
       console.error(err);
       alert("Server Error ❌");
+    } finally {
+      setLoading(false);
     }
   };
+
+  // 🔐 FORGOT PASSWORD
+  const handleForgotPassword = async () => {
+
+  const userEmail = prompt("Enter your registered email 📧");
+
+  if (!userEmail) {
+    alert("Email is required ❌");
+    return;
+  }
+
+  try {
+    setLoading(true);
+
+    const res = await fetch("http://localhost:8080/api/auth/forgot-password", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email: userEmail })
+    });
+
+    const data = await res.text();
+
+    if (res.ok) {
+      alert("Reset link sent to your email 📩");
+    } else {
+      alert(data || "Something went wrong ❌");
+    }
+
+  } catch (err) {
+    console.error(err);
+    alert("Server Error ❌");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#0f0f12]">
@@ -98,13 +160,15 @@ function LoginPage({ onNavigate }) {
                   />
                 </div>
 
+                {/* 🔐 CONNECTED FORGOT PASSWORD */}
                 <div className="text-right">
-                  <a
+                  <button
+                    type="button"
+                    onClick={handleForgotPassword}
                     className="text-xs font-semibold text-[var(--accent)] transition hover:text-[#f7a23b]"
-                    href="#"
                   >
                     Forgot password?
-                  </a>
+                  </button>
                 </div>
 
                 <div className="flex items-center justify-between text-xs text-white/60">
@@ -118,8 +182,9 @@ function LoginPage({ onNavigate }) {
                   onClick={handleLogin}
                   className="w-full rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[var(--on-dark)] shadow-lg shadow-[var(--accent)]/30 transition hover:-translate-y-0.5"
                   type="button"
+                  disabled={loading}
                 >
-                  Log In
+                  {loading ? "Processing..." : "Log In"}
                 </button>
 
                 <p className="text-center text-[11px] text-white/60">

@@ -1,16 +1,16 @@
 package com.barbershop.entity;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name="users")
+@Table(name = "users")
 public class User {
 
     @Id
@@ -26,4 +26,9 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    // 🔐 Forgot Password Fields
+    private String resetToken;
+
+    private LocalDateTime tokenExpiry;
 }
