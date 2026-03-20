@@ -27,14 +27,13 @@ public class AuthService {
             throw new RuntimeException("Email already registered");
         }
 
-        // ✅ ROLE LOGIC (separate)
+
         Role userRole = Role.USER;
 
         if (request.getRole() != null && request.getRole().equalsIgnoreCase("OWNER")) {
             userRole = Role.OWNER;
         }
 
-        // ✅ USER BUILD
         User user = User.builder()
                 .name(request.getFirstName() + " " + request.getLastName())
                 .email(request.getEmail())
@@ -82,7 +81,6 @@ public class AuthService {
 
     public void resetPassword(String token, String newPassword) {
 
-        // ✅ FIXED (use repository method only)
         User user = repository.findByResetToken(token)
                 .orElseThrow(() -> new RuntimeException("Invalid token"));
 

@@ -21,7 +21,7 @@ function OwnerDashboard({ onNavigate }) {
   return (
     <div className="flex min-h-screen bg-[#f5f7fb]">
 
-      {/* ================= SIDEBAR ================= */}
+    
       <aside className="w-72 bg-gradient-to-b from-[#0f172a] to-[#1e293b] text-white p-5 hidden md:flex flex-col">
         
         <h1 className="text-xl font-bold mb-6">✂️ BarberShop Booking</h1>
@@ -67,10 +67,10 @@ function OwnerDashboard({ onNavigate }) {
         </nav>
       </aside>
 
-      {/* ================= MAIN ================= */}
+       
       <div className="flex-1 text-gray-800">
 
-        {/* ===== HEADER ===== */}
+        
         <div className="flex justify-between items-center p-5 bg-white shadow-sm">
           <div>
             <h2 className="text-lg font-semibold">
@@ -102,7 +102,7 @@ function OwnerDashboard({ onNavigate }) {
 
         <div className="p-6 space-y-6">
 
-          {/* ===== STATS ===== */}
+          
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {[
               { title: "Total Shops", value: "2", color: "from-blue-500 to-blue-700" },
@@ -120,7 +120,7 @@ function OwnerDashboard({ onNavigate }) {
             ))}
           </div>
 
-          {/* ===== ADD SHOP + MY SHOPS ===== */}
+          
           <div className="grid md:grid-cols-2 gap-6">
 
             {/* Add Shop */}
@@ -146,7 +146,7 @@ function OwnerDashboard({ onNavigate }) {
               </div>
             </div>
 
-            {/* My Shops */}
+           
             <div className="bg-white p-5 rounded-xl shadow">
               <h3 className="font-semibold mb-4">My Shops</h3>
 
@@ -178,7 +178,7 @@ function OwnerDashboard({ onNavigate }) {
             </div>
           </div>
 
-          {/* ===== BOOKINGS ===== */}
+           
           <div className="bg-white p-5 rounded-xl shadow">
             <h3 className="font-semibold mb-4">Recent Bookings</h3>
 
@@ -207,7 +207,7 @@ function OwnerDashboard({ onNavigate }) {
             ))}
           </div>
 
-          {/* ===== QUICK ACTIONS ===== */}
+     
           <div className="bg-white p-5 rounded-xl shadow">
             <h3 className="font-semibold mb-4">Quick Actions</h3>
 
@@ -232,8 +232,7 @@ function OwnerDashboard({ onNavigate }) {
 
         </div>
       </div>
-
-      {/* ===== COMMON INPUT STYLE ===== */}
+ 
       <style>
         {`
           .input {
