@@ -1,27 +1,29 @@
 package com.barbershop.entity;
 
+
+import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDateTime;
 
-@Document(collection = "users")
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name="users")
 public class User {
 
     @Id
-    private String id; // ✅ Mongo uses String id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String name;
-    private String email;
-    private String password;
-    private Role role;
 
-    // ✅ Forgot Password fields
-    private String resetToken;
-    private LocalDateTime tokenExpiry;
+    @Column(unique = true)
+    private String email;
+
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }
