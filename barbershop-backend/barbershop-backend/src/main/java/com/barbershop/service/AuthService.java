@@ -21,24 +21,37 @@ public class AuthService {
     private final JwtService jwtService;
     private final EmailService emailService;
 
-    public AuthResponse register(RegisterRequest request){
+    public AuthResponse registerUser(RegisterRequest request){
 
         if(repository.findByEmail(request.getEmail()).isPresent()){
             throw new RuntimeException("Email already registered");
-        }
-
-
-        Role userRole = Role.USER;
-
-        if (request.getRole() != null && request.getRole().equalsIgnoreCase("OWNER")) {
-            userRole = Role.OWNER;
         }
 
         User user = User.builder()
                 .name(request.getFirstName() + " " + request.getLastName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(userRole)
+                .role(Role.USER) // ✅ FIXED
+                .build();
+
+        repository.save(user);
+
+        String token = jwtService.generateToken(user.getEmail());
+
+        return new AuthResponse(token, user.getRole().name());
+    }
+
+    public AuthResponse registerOwner(RegisterRequest request){
+
+        if(repository.findByEmail(request.getEmail()).isPresent()){
+            throw new RuntimeException("Email already registered");
+        }
+
+        User user = User.builder()
+                .name(request.getFirstName() + " " + request.getLastName())
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .role(Role.OWNER) // ✅ FIXED
                 .build();
 
         repository.save(user);

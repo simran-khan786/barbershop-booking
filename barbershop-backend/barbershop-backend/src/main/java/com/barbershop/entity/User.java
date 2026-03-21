@@ -24,4 +24,5 @@ public class User {
     // ✅ Forgot Password fields
     private String resetToken;
     private LocalDateTime tokenExpiry;
+
 }

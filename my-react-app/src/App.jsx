@@ -8,7 +8,9 @@ import ResetPasswordPage from "./components/pages/ResetPasswordPage.jsx";
 import OwnerDashboard from "./components/pages/OwnerDashboard.jsx";
 import OwnerRegisterPage from "./components/pages/OwnerRegisterPage.jsx";
 
-// ROUTES (VALUES = SAME STRING USED IN NAVIGATION)
+import { Toaster } from "react-hot-toast"; // ✅ IMPORT
+
+// ROUTES
 const ROUTES = {
   landing: "landing",
   login: "login",
@@ -16,7 +18,7 @@ const ROUTES = {
   home: "home",
   resetPassword: "resetPassword",
   owner: "owner",
-  ownerRegister: "owner-register", // ✅ IMPORTANT
+  ownerRegister: "owner-register",
 };
 
 function App() {
@@ -32,11 +34,9 @@ function App() {
     }
   }, []);
 
-  // ✅ FIXED NAVIGATION
   const handleNavigate = (next) => {
-    console.log("NAVIGATE TO:", next); // debug
+    console.log("NAVIGATE TO:", next);
 
-    // 🔥 IMPORTANT FIX
     if (Object.values(ROUTES).includes(next)) {
       setRoute(next);
 
@@ -75,6 +75,23 @@ function App() {
 
   return (
     <div className="min-h-screen bg-[var(--page-bg)] text-[var(--page-text)]">
+
+      {/* ✅ GLOBAL TOASTER (IMPORTANT) */}
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 2500,
+          style: {
+            background: "#1c1d22",
+            color: "#ffffff",
+            border: "1px solid rgba(255,255,255,0.1)",
+            borderRadius: "12px",
+            padding: "12px 16px",
+            fontSize: "14px",
+          },
+        }}
+      />
+
       {content}
     </div>
   );

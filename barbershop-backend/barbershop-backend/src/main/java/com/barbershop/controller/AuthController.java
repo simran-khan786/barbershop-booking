@@ -14,10 +14,19 @@ public class AuthController {
 
     private final AuthService service;
 
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
+    @PostMapping("/register/user")
+    public ResponseEntity<?> registerUser(@RequestBody RegisterRequest request) {
         try {
-            return ResponseEntity.ok(service.register(request));
+            return ResponseEntity.ok(service.registerUser(request));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/register/owner")
+    public ResponseEntity<?> registerOwner(@RequestBody RegisterRequest request) {
+        try {
+            return ResponseEntity.ok(service.registerOwner(request));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

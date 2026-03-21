@@ -1,4 +1,5 @@
 ﻿import { useState } from "react";
+import toast from "react-hot-toast";
 
 function LoginPage({ onNavigate }) {
 
@@ -27,23 +28,24 @@ function LoginPage({ onNavigate }) {
       const data = await res.json();
 
       if (res.ok) {
-  alert("Login Successful ✅");
+  toast.success("Login Successful ✅");
 
   if (data?.token) {
     localStorage.setItem("token", data.token);
   }
 
-  // ✅ SAVE ROLE
   if (data?.role) {
     localStorage.setItem("role", data.role);
   }
 
-  // ✅ ROLE BASED REDIRECT
-  if (data.role === "OWNER") {
-    onNavigate("owner");
-  } else {
-    onNavigate("home");
-  }
+  // ✅ DELAY REDIRECT (2.5 sec)
+  setTimeout(() => {
+    if (data.role === "OWNER") {
+      onNavigate("owner");
+    } else {
+      onNavigate("home");
+    }
+  }, 2500);
 
         
 
