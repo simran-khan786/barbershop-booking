@@ -20,9 +20,7 @@ function LandingPage({ onNavigate }) {
           />
           <div className="pointer-events-none absolute bottom-0 left-0 h-24 w-full bg-gradient-to-b from-transparent to-[#1a1b1f]" />
           <div className="relative z-10 flex min-h-[70vh] flex-col items-center justify-center px-6 py-16 text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.4em] text-[var(--accent)]">
-              Elite cuts
-            </p>
+            
             <h1 className="font-display mt-5 text-4xl leading-tight text-white sm:text-5xl md:text-6xl">
               Look Sharp.
               <br />
@@ -32,22 +30,70 @@ function LandingPage({ onNavigate }) {
               Premium men's grooming services delivered by master barbers in a modern,
               masculine environment. Experience the art of the perfect cut.
             </p>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-              <button
-                className="rounded-full bg-[var(--accent)] px-7 py-3 text-sm font-semibold text-[var(--on-dark)] shadow-lg shadow-[var(--accent)]/30 transition hover:-translate-y-0.5"
-                onClick={() => onNavigate("register")}
-                type="button"
-              >
-                Sign Up
-              </button>
-              <button
-                className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-6 py-3 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
-                onClick={() => onNavigate("login")}
-                type="button"
-              >
-                Login
-              </button>
-            </div>
+<div className="mt-10 w-full overflow-hidden">
+  <div className="flex gap-6 animate-scroll whitespace-nowrap">
+
+    {[
+      {
+        name: "Men's Waxing Services",
+        location: "City Center, Gwalior",
+        price: "₹699",
+        img: "https://tse1.explicit.bing.net/th/id/OIP.T6cWZ_fiZOZkQlMbOwH90wHaE8?rs=1&pid=ImgDetMain&o=7&rm=3"
+      },
+      {
+        name: "Hair Cutting & Styling",
+        location: "Prem Nagar, Gwalior",
+        price: "₹549",
+        img: "https://thumbs.dreamstime.com/b/barber-shop-men-hair-cut-barber-doing-men-fashion-hairstyle-barber-shop-men-hair-cut-barber-doing-men-fashion-hairstyle-cutting-121116869.jpg"
+      },
+      {
+        name: "Razor Shave",
+        location: "DD Nagar, Gwalior",
+        price: "₹799",
+        img: "https://tse4.mm.bing.net/th/id/OIP._Lg-zIjodxNc8FPOFecx0gHaE7?rs=1&pid=ImgDetMain&o=7&rm=3"
+      },
+      {
+        name: "Facial Treatment",
+        location: "Thatipur, Gwalior",
+        price: "₹599",
+        img: "https://image.shutterstock.com/z/stock-photo-barber-applying-purifying-mask-on-his-client-face-583807252.jpg"
+      },
+      {
+        name: "Hair Coloring & Highlights",
+        location: "Thatipur, Gwalior",
+        price: "₹599",
+        img: "https://www.apetogentleman.com/wp-content/uploads/2022/03/hair-dye-men-salon-800x534.jpg",
+      },
+      {
+        name: "Hair Wash & Scalp Massage",
+        location: "DD Nagar, Gwalior",
+        price: "₹799",
+        img: "https://images.squarespace-cdn.com/content/v1/5db8681c68eae7671fe4cc2e/9d71f2ee-3a3a-40eb-87f1-d4a6420d6d41/Gentleman's+Barber+Spa+NYC+wash.jpeg?format=1500w"
+      },
+      {
+        name: "Hair Spa",
+        location: "DD Nagar, Gwalior",
+        price: "₹799",
+        img: "https://mensroomspa.com/wp-content/uploads/2022/11/the-mens-room-barber-lounge-and-spa-in-rochester-ny.jpg"
+      },
+    ].map((card, i) => (
+      <div
+        key={i}
+        className="min-w-[260px] max-w-[260px] rounded-2xl overflow-hidden bg-[#1c1d22] border border-white/10 shadow-lg"
+      >
+        <img src={card.img} className="h-36 w-full object-cover" />
+        <div className="p-4 text-left">
+          <p className="text-white text-sm font-semibold">{card.name}</p>
+          <p className="text-white/60 text-xs mt-1">{card.location}</p>
+          <p className="text-[var(--accent)] text-sm mt-2 font-semibold">
+            {card.price}
+          </p>
+        </div>
+      </div>
+    ))}
+
+  </div>
+</div>
           </div>
         </section>
 
