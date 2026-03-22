@@ -1,14 +1,11 @@
 import { useState } from "react";
-<<<<<<< HEAD
 import toast from "react-hot-toast";
 
 function RegisterPage({ onNavigate }) {
   const [role, setRole] = useState("User"); // ✅ kept (no UI change)
-=======
 
 function RegisterPage({ onNavigate }) {
   const [role, setRole] = useState("User");
->>>>>>> a0b73ffadab2a65174a54ef40e30f365b94d424a
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -19,7 +16,6 @@ function RegisterPage({ onNavigate }) {
 
   const handleRegister = async () => {
 
-<<<<<<< HEAD
     if (password !== confirmPassword) {
       toast.error("Passwords do not match");
       return;
@@ -59,7 +55,6 @@ function RegisterPage({ onNavigate }) {
       alert("Server Error ❌");
     }
   };
-=======
   if (password !== confirmPassword) {
     alert("Passwords do not match ❌");
     return;
@@ -94,7 +89,6 @@ function RegisterPage({ onNavigate }) {
     alert("Server Error ❌");
   }
 };
->>>>>>> a0b73ffadab2a65174a54ef40e30f365b94d424a
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#0f0f12]">
@@ -214,10 +208,7 @@ function RegisterPage({ onNavigate }) {
                   />
                 </div>
 
-<<<<<<< HEAD
-=======
 
->>>>>>> a0b73ffadab2a65174a54ef40e30f365b94d424a
                 <button
                   onClick={handleRegister}
                   className="w-full rounded-full bg-gradient-to-r from-[#c24c1a] via-[#e26a2c] to-[#f7a23b] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[#f7a23b]/30 transition-transform duration-300 ease-out hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f7a23b]/40"

@@ -27,7 +27,6 @@ public class AuthService {
                 .name(request.getFirstName() + " " + request.getLastName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-<<<<<<< HEAD
                 .role(Role.USER) // ✅ FIXED
                 .build();
 
@@ -49,9 +48,6 @@ public class AuthService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.OWNER) // ✅ FIXED
-=======
-                .role(Role.USER)
->>>>>>> a0b73ffadab2a65174a54ef40e30f365b94d424a
                 .build();
 
         repository.save(user);
