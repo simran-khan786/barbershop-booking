@@ -1,7 +1,14 @@
 import { useState } from "react";
+import AddShopModal from "../organisms/AddShopModal";
+import AddServiceModal from "../organisms/AddServiceModal";
 
 function OwnerDashboard({ onNavigate }) {
   const [activeMenu, setActiveMenu] = useState("Dashboard");
+  const [showShopModal, setShowShopModal] = useState(false);
+  const [showServiceModal, setShowServiceModal] = useState(false);
+
+  const [shops, setShops] = useState([]);
+  const [services, setServices] = useState([]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -15,50 +22,37 @@ function OwnerDashboard({ onNavigate }) {
       return;
     }
 
+    if (item === "Add Shop") {
+      setShowShopModal(true);
+    }
+
+    if (item === "Services") {
+      setShowServiceModal(true);
+    }
+
     setActiveMenu(item);
   };
 
+  // ✅ Delete Shop
+  const handleDelete = (index) => {
+    const updated = shops.filter((_, i) => i !== index);
+    setShops(updated);
+  };
+
   return (
-    <div className="flex min-h-screen bg-[#f5f7fb]">
+    <div className="flex min-h-screen bg-[#0f172a] text-white">
 
-    
-      <aside className="w-72 bg-gradient-to-b from-[#0f172a] to-[#1e293b] text-white p-5 hidden md:flex flex-col">
-        
-        <h1 className="text-xl font-bold mb-6">✂️ BarberShop Booking</h1>
+      {/* Sidebar */}
+      <aside className="w-72 bg-[#020617] p-5 hidden md:flex flex-col">
+        <h1 className="text-xl font-bold mb-6">✂️ BarberShop</h1>
 
-        {/* Profile */}
-        <div className="flex items-center gap-3 mb-6">
-          <img
-            src="https://i.pravatar.cc/100"
-            className="w-12 h-12 rounded-full"
-          />
-          <div>
-            <p className="font-semibold">Elite Cuts</p>
-            <p className="text-xs text-green-400">✔ Verified • ⭐ 4.8</p>
-          </div>
-        </div>
-
-        {/* Menu */}
         <nav className="space-y-2">
-          {[
-            "Dashboard",
-            "Add Shop",
-            "My Shops",
-            "Services",
-            "Bookings",
-            "Earnings",
-            "Reviews",
-            "Profile Settings",
-            "Help & Support",
-            "Logout"
-          ].map((item) => (
+          {["Dashboard","Add Shop","My Shops","Services","Logout"].map((item) => (
             <button
               key={item}
               onClick={() => handleMenuClick(item)}
-              className={`w-full text-left px-4 py-2 rounded-lg text-sm transition ${
-                activeMenu === item
-                  ? "bg-green-600"
-                  : "hover:bg-white/10"
+              className={`w-full text-left px-4 py-2 rounded-lg ${
+                activeMenu === item ? "bg-green-600" : "hover:bg-white/10"
               }`}
             >
               {item}
@@ -67,191 +61,126 @@ function OwnerDashboard({ onNavigate }) {
         </nav>
       </aside>
 
-       
-      <div className="flex-1 text-gray-800">
+      {/* Main */}
+      <div className="flex-1">
 
-        
-        <div className="flex justify-between items-center p-5 bg-white shadow-sm">
-          <div>
-            <h2 className="text-lg font-semibold">
-              👋 Welcome, Raj Barber (Owner)
-            </h2>
-            <p className="text-sm text-gray-500">Elite Cuts — Bhopal</p>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <div className="relative">
-              🔔
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">
-                3
-              </span>
-            </div>
-            <img
-              src="https://i.pravatar.cc/40"
-              className="w-10 h-10 rounded-full"
-            />
-            <button
-              className="bg-gray-100 text-gray-800 px-3 py-1 rounded-lg text-sm"
-              onClick={handleLogout}
-              type="button"
-            >
-              Logout
-            </button>
-          </div>
+        {/* Header */}
+        <div className="flex justify-between items-center p-5 bg-[#020617] border-b border-gray-700">
+          <h2 className="text-lg font-semibold">👋 Welcome, Raj Barber</h2>
+          <button onClick={handleLogout} className="bg-gray-700 px-3 py-1 rounded">
+            Logout
+          </button>
         </div>
 
-        <div className="p-6 space-y-6">
+        {/* Content */}
+        <div className="p-6">
 
-          
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            {[
-              { title: "Total Shops", value: "2", color: "from-blue-500 to-blue-700" },
-              { title: "Today's Bookings", value: "18", color: "from-green-500 to-green-700" },
-              { title: "Monthly Earnings", value: "₹45,230", color: "from-orange-500 to-orange-700" },
-              { title: "Pending Requests", value: "7", color: "from-red-500 to-red-700" }
-            ].map((card) => (
-              <div
-                key={card.title}
-                className={`p-4 rounded-xl text-white bg-gradient-to-r ${card.color}`}
-              >
-                <p className="text-sm">{card.title}</p>
-                <h3 className="text-2xl font-bold">{card.value}</h3>
-              </div>
-            ))}
-          </div>
+          {/* Add Shop Button */}
+          <button
+            onClick={() => setShowShopModal(true)}
+            className="bg-green-600 px-4 py-2 rounded-lg mb-6"
+          >
+            + Add Shop
+          </button>
 
-          
-          <div className="grid md:grid-cols-2 gap-6">
+          {/* ================= MY SHOPS ================= */}
+          {activeMenu === "My Shops" && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
 
-            {/* Add Shop */}
-            <div className="bg-white p-5 rounded-xl shadow">
-              <h3 className="font-semibold mb-4 text-gray-900">Add New Shop</h3>
+              {shops.length === 0 ? (
+                <p>No shops added yet</p>
+              ) : (
+                shops.map((shop, i) => (
+                  <div
+                    key={i}
+                    className="bg-[#1e293b] rounded-xl shadow hover:shadow-lg overflow-hidden"
+                  >
+                    {shop.image && (
+                      <img
+                        src={URL.createObjectURL(shop.image)}
+                        className="w-full h-40 object-cover"
+                      />
+                    )}
 
-              <div className="space-y-3">
-                <input placeholder="Shop Name" className="input" />
-                <input placeholder="Address" className="input" />
+                    <div className="p-4 space-y-2">
+                      <h3 className="font-semibold text-lg">{shop.shopName}</h3>
 
-                <div className="flex gap-2">
-                  <input placeholder="City" className="input flex-1" />
-                  <input placeholder="Pincode" className="input flex-1" />
-                </div>
-
-                <input placeholder="Phone (+91)" className="input" />
-
-                <textarea placeholder="Description" className="input h-20" />
-
-                <button className="w-full bg-green-600 text-white py-2 rounded-lg">
-                  + Add Shop
-                </button>
-              </div>
-            </div>
-
-           
-            <div className="bg-white p-5 rounded-xl shadow">
-              <h3 className="font-semibold mb-4">My Shops</h3>
-
-              {[1, 2].map((_, i) => (
-                <div
-                  key={i}
-                  className="flex items-center justify-between border-b py-3"
-                >
-                  <div className="flex gap-3 items-center">
-                    <img
-                      src="https://picsum.photos/60"
-                      className="w-14 h-14 rounded-lg"
-                    />
-                    <div>
-                      <p className="font-medium">Elite Cuts</p>
-                      <p className="text-sm text-gray-500">
-                        Bhopal • 5 Services
+                      <p className="text-sm text-gray-400">
+                        📍 {shop.address}, {shop.city}
                       </p>
+
+                      <p className="text-sm text-gray-400">
+                        📞 {shop.phone}
+                      </p>
+
+                      <div className="text-xs text-gray-400">
+                        <p>⏰ {shop.openingTime} - {shop.closingTime}</p>
+                        <p>☕ Break: {shop.breakStart} - {shop.breakEnd}</p>
+                      </div>
+
+                      <button
+                        onClick={() => handleDelete(i)}
+                        className="w-full mt-2 bg-red-500 py-1 rounded"
+                      >
+                        Delete
+                      </button>
                     </div>
                   </div>
+                ))
+              )}
 
-                  <div className="flex gap-2 text-xs">
-                    <button className="btn">View</button>
-                    <button className="btn">Edit</button>
-                    <button className="btn">Bookings</button>
-                  </div>
-                </div>
-              ))}
             </div>
-          </div>
+          )}
 
-           
-          <div className="bg-white p-5 rounded-xl shadow">
-            <h3 className="font-semibold mb-4">Recent Bookings</h3>
+          {/* ================= SERVICES ================= */}
+          {activeMenu === "Services" && (
+            <div className="bg-[#1e293b] p-5 rounded-xl">
 
-            {[1, 2, 3].map((_, i) => (
-              <div
-                key={i}
-                className="flex justify-between items-center border-b py-3"
+              <h3 className="mb-4 font-semibold">My Services</h3>
+
+              <button
+                onClick={() => setShowServiceModal(true)}
+                className="bg-green-600 px-4 py-2 rounded mb-4"
               >
-                <div className="flex gap-3 items-center">
-                  <img
-                    src="https://i.pravatar.cc/50"
-                    className="w-10 h-10 rounded-full"
-                  />
-                  <div>
-                    <p className="font-medium">User Name</p>
-                    <p className="text-sm text-gray-500">
-                      Hair Cut + Beard • 10:00 AM
-                    </p>
+                + Add Service
+              </button>
+
+              {services.length === 0 ? (
+                <p>No services added</p>
+              ) : (
+                services.map((s, i) => (
+                  <div key={i} className="border-b border-gray-600 py-2">
+                    <p>{s.name} - ₹{s.price}</p>
+                    <p className="text-sm text-gray-400">{s.duration}</p>
                   </div>
-                </div>
+                ))
+              )}
 
-                <span className="text-green-600 text-sm font-medium">
-                  Confirmed
-                </span>
-              </div>
-            ))}
-          </div>
-
-     
-          <div className="bg-white p-5 rounded-xl shadow">
-            <h3 className="font-semibold mb-4">Quick Actions</h3>
-
-            <div className="flex flex-wrap gap-3">
-              {[
-                "Add Shop",
-                "Manage Services",
-                "View Bookings",
-                "Earnings",
-                "Reviews",
-                "Settings"
-              ].map((btn) => (
-                <button
-                  key={btn}
-                  className="px-4 py-2 bg-gray-100 rounded-lg text-sm hover:bg-gray-200"
-                >
-                  {btn}
-                </button>
-              ))}
             </div>
-          </div>
+          )}
 
         </div>
       </div>
- 
-      <style>
-        {`
-          .input {
-            width: 100%;
-            border: 1px solid #e5e7eb;
-            padding: 10px;
-            border-radius: 10px;
-            outline: none;
-          }
-          .input:focus {
-            border-color: #22c55e;
-          }
-          .btn {
-            background: #f3f4f6;
-            padding: 6px 10px;
-            border-radius: 8px;
-          }
-        `}
-      </style>
+
+      {/* Modals */}
+      <AddShopModal
+        isOpen={showShopModal}
+        onClose={() => setShowShopModal(false)}
+        onSave={(newShop) => {
+          setShops([...shops, newShop]);
+          setActiveMenu("My Shops");
+        }}
+      />
+
+      <AddServiceModal
+        isOpen={showServiceModal}
+        onClose={() => setShowServiceModal(false)}
+        onSave={(newService) => {
+          setServices([...services, newService]);
+          setActiveMenu("Services");
+        }}
+      />
+
     </div>
   );
 }
