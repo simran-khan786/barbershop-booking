@@ -17,7 +17,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
-    public AuthResponse register(RegisterRequest request){
+    public AuthResponse registerUser(RegisterRequest request){
 
         if(repository.findByEmail(request.getEmail()).isPresent()){
             throw new RuntimeException("Email already registered");
@@ -27,7 +27,31 @@ public class AuthService {
                 .name(request.getFirstName() + " " + request.getLastName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
+<<<<<<< HEAD
+                .role(Role.USER) // ✅ FIXED
+                .build();
+
+        repository.save(user);
+
+        String token = jwtService.generateToken(user.getEmail());
+
+        return new AuthResponse(token, user.getRole().name());
+    }
+
+    public AuthResponse registerOwner(RegisterRequest request){
+
+        if(repository.findByEmail(request.getEmail()).isPresent()){
+            throw new RuntimeException("Email already registered");
+        }
+
+        User user = User.builder()
+                .name(request.getFirstName() + " " + request.getLastName())
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .role(Role.OWNER) // ✅ FIXED
+=======
                 .role(Role.USER)
+>>>>>>> a0b73ffadab2a65174a54ef40e30f365b94d424a
                 .build();
 
         repository.save(user);

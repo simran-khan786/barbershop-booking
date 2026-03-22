@@ -1,7 +1,7 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 function RegisterPage({ onNavigate }) {
-  const [role, setRole] = useState("User");
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -12,40 +12,45 @@ function RegisterPage({ onNavigate }) {
 
   const handleRegister = async () => {
 
-  if (password !== confirmPassword) {
-    alert("Passwords do not match ❌");
-    return;
-  }
-
-  try {
-    const res = await fetch("http://localhost:8080/api/auth/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        firstName,
-        lastName,
-        email,
-        password,
-        role: role.toUpperCase() // ✅ IMPORTANT FIX
-      })
-    });
-
-    const data = await res.json();
-
-    if (res.ok) {
-      alert("Registered Successfully ✅");
-      onNavigate("login");
-    } else {
-      alert(data);
+    if (password !== confirmPassword) {
+      alert("Passwords do not match ❌");
+      return;
     }
 
-  } catch (err) {
-    console.error(err);
-    alert("Server Error ❌");
-  }
-};
+    try {
+      const res = await fetch("http://localhost:8080/api/auth/register/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          password,
+          role: "USER" // ✅ FORCE USER ONLY
+        })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+  toast.success("Registered Successfully ✅");
+
+  // ⏳ delay before redirect
+  setTimeout(() => {
+    onNavigate("login");
+  }, 2500);
+
+      } else {
+        alert(data);
+      }
+
+    } catch (err) {
+      console.error(err);
+      alert("Server Error ❌");
+    }
+  };
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#0f0f12]">
@@ -85,7 +90,7 @@ function RegisterPage({ onNavigate }) {
 
             <div className="mt-8 rounded-[28px] border border-white/10 bg-[#1c1d22] p-6 text-left shadow-[0_30px_80px_-40px_rgba(0,0,0,0.6)] md:p-8">
               <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-                
+
                 <div className="grid gap-4 md:grid-cols-2">
                   <div>
                     <label className="text-xs uppercase tracking-[0.2em] text-white/60">
@@ -94,7 +99,7 @@ function RegisterPage({ onNavigate }) {
                     <input
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
-                      className="mt-2 w-full rounded-xl border border-white/10 bg-[#111111] px-4 py-3 text-sm text-white shadow-sm outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 placeholder:text-white/40"
+                      className="mt-2 w-full rounded-xl border border-white/10 bg-[#111111] px-4 py-3 text-sm text-white outline-none focus:border-[var(--accent)]"
                       placeholder="First name"
                       type="text"
                     />
@@ -106,7 +111,7 @@ function RegisterPage({ onNavigate }) {
                     <input
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
-                      className="mt-2 w-full rounded-xl border border-white/10 bg-[#111111] px-4 py-3 text-sm text-white shadow-sm outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 placeholder:text-white/40"
+                      className="mt-2 w-full rounded-xl border border-white/10 bg-[#111111] px-4 py-3 text-sm text-white outline-none focus:border-[var(--accent)]"
                       placeholder="Last name"
                       type="text"
                     />
@@ -120,7 +125,7 @@ function RegisterPage({ onNavigate }) {
                   <input
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="mt-2 w-full rounded-xl border border-white/10 bg-[#111111] px-4 py-3 text-sm text-white shadow-sm outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 placeholder:text-white/40"
+                    className="mt-2 w-full rounded-xl border border-white/10 bg-[#111111] px-4 py-3 text-sm text-white outline-none focus:border-[var(--accent)]"
                     placeholder="you@example.com"
                     type="email"
                   />
@@ -133,7 +138,7 @@ function RegisterPage({ onNavigate }) {
                   <input
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="mt-2 w-full rounded-xl border border-white/10 bg-[#111111] px-4 py-3 text-sm text-white shadow-sm outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 placeholder:text-white/40"
+                    className="mt-2 w-full rounded-xl border border-white/10 bg-[#111111] px-4 py-3 text-sm text-white outline-none focus:border-[var(--accent)]"
                     placeholder="+91 98765 43210"
                     type="tel"
                   />
@@ -146,7 +151,7 @@ function RegisterPage({ onNavigate }) {
                   <input
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="mt-2 w-full rounded-xl border border-white/10 bg-[#111111] px-4 py-3 text-sm text-white shadow-sm outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 placeholder:text-white/40"
+                    className="mt-2 w-full rounded-xl border border-white/10 bg-[#111111] px-4 py-3 text-sm text-white outline-none focus:border-[var(--accent)]"
                     placeholder="Create a password"
                     type="password"
                   />
@@ -159,40 +164,15 @@ function RegisterPage({ onNavigate }) {
                   <input
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="mt-2 w-full rounded-xl border border-white/10 bg-[#111111] px-4 py-3 text-sm text-white shadow-sm outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 placeholder:text-white/40"
+                    className="mt-2 w-full rounded-xl border border-white/10 bg-[#111111] px-4 py-3 text-sm text-white outline-none focus:border-[var(--accent)]"
                     placeholder="Repeat password"
                     type="password"
                   />
                 </div>
 
-                <div>
-                  <label className="text-xs uppercase tracking-[0.2em] text-white/60">
-                    Role
-                  </label>
-                  <div className="mt-3 flex gap-3">
-                    {["User", "Owner"].map((option) => {
-                      const selected = role === option;
-                      return (
-                        <button
-                          key={option}
-                          className={`flex-1 rounded-full border px-4 py-2 text-sm font-semibold transition ${
-                            selected
-                              ? "border-[var(--accent)] bg-[var(--accent)] text-white"
-                              : "border-white/20 bg-[#111111] text-white/80 hover:border-[var(--accent)] hover:text-[var(--accent)]"
-                          }`}
-                          onClick={() => setRole(option)}
-                          type="button"
-                        >
-                          {option}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
                 <button
                   onClick={handleRegister}
-                  className="w-full rounded-full bg-gradient-to-r from-[#c24c1a] via-[#e26a2c] to-[#f7a23b] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[#f7a23b]/30 transition-transform duration-300 ease-out hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f7a23b]/40"
+                  className="w-full rounded-full bg-gradient-to-r from-[#c24c1a] via-[#e26a2c] to-[#f7a23b] px-5 py-3 text-sm font-semibold text-white"
                   type="button"
                 >
                   Create account

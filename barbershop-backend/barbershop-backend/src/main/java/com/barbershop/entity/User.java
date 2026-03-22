@@ -19,6 +19,13 @@ public class User {
 
     private String name;
 
+<<<<<<< HEAD
+    // ✅ Forgot Password fields
+    private String resetToken;
+    private LocalDateTime tokenExpiry;
+
+}
+=======
     @Column(unique = true)
     private String email;
 
@@ -27,3 +34,4 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 }
+>>>>>>> a0b73ffadab2a65174a54ef40e30f365b94d424a
