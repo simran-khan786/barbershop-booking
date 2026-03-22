@@ -8,9 +8,13 @@ import ResetPasswordPage from "./components/pages/ResetPasswordPage.jsx";
 import OwnerDashboard from "./components/pages/OwnerDashboard.jsx";
 import OwnerRegisterPage from "./components/pages/OwnerRegisterPage.jsx";
 
+<<<<<<< HEAD
 import { Toaster } from "react-hot-toast"; // ✅ IMPORT
 
 // ROUTES
+=======
+// ROUTES (VALUES = SAME STRING USED IN NAVIGATION)
+>>>>>>> a0b73ffadab2a65174a54ef40e30f365b94d424a
 const ROUTES = {
   landing: "landing",
   login: "login",
@@ -18,7 +22,11 @@ const ROUTES = {
   home: "home",
   resetPassword: "resetPassword",
   owner: "owner",
+<<<<<<< HEAD
   ownerRegister: "owner-register",
+=======
+  ownerRegister: "owner-register", // ✅ IMPORTANT
+>>>>>>> a0b73ffadab2a65174a54ef40e30f365b94d424a
 };
 
 function App() {
@@ -34,9 +42,16 @@ function App() {
     }
   }, []);
 
+  // ✅ FIXED NAVIGATION
   const handleNavigate = (next) => {
+<<<<<<< HEAD
     console.log("NAVIGATE TO:", next);
 
+=======
+    console.log("NAVIGATE TO:", next); // debug
+
+    // 🔥 IMPORTANT FIX
+>>>>>>> a0b73ffadab2a65174a54ef40e30f365b94d424a
     if (Object.values(ROUTES).includes(next)) {
       setRoute(next);
 

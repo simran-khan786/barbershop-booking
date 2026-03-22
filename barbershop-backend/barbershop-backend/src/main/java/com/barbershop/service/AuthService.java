@@ -9,9 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
-
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -19,7 +16,6 @@ public class AuthService {
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
-    private final EmailService emailService;
 
     public AuthResponse registerUser(RegisterRequest request){
 
@@ -31,6 +27,7 @@ public class AuthService {
                 .name(request.getFirstName() + " " + request.getLastName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
+<<<<<<< HEAD
                 .role(Role.USER) // ✅ FIXED
                 .build();
 
@@ -52,13 +49,16 @@ public class AuthService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.OWNER) // ✅ FIXED
+=======
+                .role(Role.USER)
+>>>>>>> a0b73ffadab2a65174a54ef40e30f365b94d424a
                 .build();
 
         repository.save(user);
 
         String token = jwtService.generateToken(user.getEmail());
 
-        return new AuthResponse(token, user.getRole().name());
+        return new AuthResponse(token);
     }
 
     public AuthResponse login(LoginRequest request){
@@ -71,40 +71,7 @@ public class AuthService {
         }
 
         String token = jwtService.generateToken(user.getEmail());
+        return new AuthResponse(token);
 
-        return new AuthResponse(token, user.getRole().name());
-    }
-
-    public void forgotPassword(String email){
-
-        User user = repository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        String token = UUID.randomUUID().toString();
-
-        user.setResetToken(token);
-        user.setTokenExpiry(LocalDateTime.now().plusMinutes(15));
-
-        repository.save(user);
-
-        String link = "http://localhost:5173/reset-password?token=" + token;
-
-        emailService.sendResetEmail(user.getEmail(), link);
-    }
-
-    public void resetPassword(String token, String newPassword) {
-
-        User user = repository.findByResetToken(token)
-                .orElseThrow(() -> new RuntimeException("Invalid token"));
-
-        if (user.getTokenExpiry().isBefore(LocalDateTime.now())) {
-            throw new RuntimeException("Token expired");
-        }
-
-        user.setPassword(passwordEncoder.encode(newPassword));
-        user.setResetToken(null);
-        user.setTokenExpiry(null);
-
-        repository.save(user);
     }
 }
