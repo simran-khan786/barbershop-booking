@@ -1,0 +1,153 @@
+Index: my-react-app/src/components/pages/HomePage.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/my-react-app/src/components/pages/HomePage.jsx b/my-react-app/src/components/pages/HomePage.jsx
+new file mode 100644
+--- /dev/null	(date 1773909683084)
++++ b/my-react-app/src/components/pages/HomePage.jsx	(date 1773909683084)
+@@ -0,0 +1,143 @@
++import React from 'react';
++
++function HomePage({ onNavigate }) {
++  return (
++    <div className="min-h-screen bg-[var(--page-bg)] text-[var(--page-text)] font-sans">
++      {/* Navbar */}
++      <nav className="border-b border-[var(--border)] bg-[var(--surface)] px-6 py-4">
++        <div className="mx-auto flex max-w-6xl items-center justify-between">
++          <div className="flex items-center gap-2">
++             <div className="h-8 w-8 rounded-full bg-[var(--accent)]" />
++            <span className="text-lg font-bold tracking-tight text-[var(--ink)]">
++              BarberBook
++            </span>
++          </div>
++          <div className="flex items-center gap-6">
++            <button className="text-sm font-medium text-[var(--muted)] hover:text-[var(--ink)]">
++              Dashboard
++            </button>
++            <button className="text-sm font-medium text-[var(--muted)] hover:text-[var(--ink)]">
++              Appointments
++            </button>
++            <button className="text-sm font-medium text-[var(--muted)] hover:text-[var(--ink)]">
++              Clients
++            </button>
++            <div className="h-8 w-8 rounded-full bg-[var(--surface-2)] border border-[var(--border)]" />
++          </div>
++        </div>
++      </nav>
++
++      {/* Main Content */}
++      <main className="mx-auto max-w-6xl px-6 py-10">
++        <div className="flex items-center justify-between">
++          <div>
++            <h1 className="text-3xl font-display font-bold text-[var(--ink)]">
++              Good morning, Alex
++            </h1>
++            <p className="mt-2 text-[var(--muted)]">
++              Here's what's happening in your shop today.
++            </p>
++          </div>
++          <button className="rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[var(--accent)]/30 hover:bg-[#8f471f] transition">
++            + New Appointment
++          </button>
++        </div>
++
++        {/* Stats Grid */}
++        <div className="mt-10 grid gap-6 md:grid-cols-3">
++          {[
++            { label: "Today's Revenue", value: "$1,250", change: "+12%" },
++            { label: "Appointments", value: "18", change: "4 slots left" },
++            { label: "New Clients", value: "3", change: "+2 this week" },
++          ].map((stat) => (
++            <div
++              key={stat.label}
++              className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm"
++            >
++              <p className="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">
++                {stat.label}
++              </p>
++              <p className="mt-3 text-3xl font-bold text-[var(--ink)]">
++                {stat.value}
++              </p>
++              <p className="mt-2 text-sm text-[var(--accent)]">{stat.change}</p>
++            </div>
++          ))}
++        </div>
++
++        {/* Upcoming Appointments */}
++        <div className="mt-10">
++          <h2 className="text-xl font-bold text-[var(--ink)]">
++            Today's Schedule
++          </h2>
++          <div className="mt-6 space-y-4">
++            {[
++              {
++                time: "09:00 AM",
++                client: "James Carter",
++                service: "Executive Cut & Beard Trim",
++                barber: "Miles H.",
++                status: "Completed",
++              },
++              {
++                time: "10:30 AM",
++                client: "David Kim",
++                service: "Skin Fade",
++                barber: "Avery C.",
++                status: "In Progress",
++              },
++              {
++                time: "11:45 AM",
++                client: "Marcus Johnson",
++                service: "Haircut",
++                barber: "Miles H.",
++                status: "Confirmed",
++              },
++              {
++                time: "01:00 PM",
++                client: "Sarah Lee",
++                service: "Buzz Cut",
++                barber: "Renee G.",
++                status: "Confirmed",
++              },
++            ].map((appt, i) => (
++              <div
++                key={i}
++                className="flex items-center justify-between rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 transition hover:bg-[var(--surface-2)]"
++              >
++                <div className="flex items-center gap-6">
++                  <span className="font-mono text-sm font-semibold text-[var(--ink)]">
++                    {appt.time}
++                  </span>
++                  <div>
++                    <p className="font-semibold text-[var(--ink)]">{appt.client}</p>
++                    <p className="text-sm text-[var(--muted)]">{appt.service}</p>
++                  </div>
++                </div>
++                <div className="flex items-center gap-6">
++                  <div className="flex items-center gap-2">
++                     <div className="h-6 w-6 rounded-full bg-[var(--surface-2)]" />
++                    <span className="text-sm text-[var(--ink)]">{appt.barber}</span>
++                  </div>
++                  <span
++                    className={`rounded-full px-3 py-1 text-xs font-semibold ${
++                      appt.status === "Completed"
++                        ? "bg-green-100 text-green-700"
++                        : appt.status === "In Progress"
++                        ? "bg-blue-100 text-blue-700"
++                        : "bg-[var(--surface-2)] text-[var(--muted-2)]"
++                    }`}
++                  >
++                    {appt.status}
++                  </span>
++                </div>
++              </div>
++            ))}
++          </div>
++        </div>
++      </main>
++    </div>
++  );
++}
++
++export default HomePage;
