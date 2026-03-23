@@ -4,27 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec055c54-5b10-4bc9-a6f4-8a6b7c0c7abe" name="Changes" comment="properties">
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.ask.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.ask2agent.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.edit.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-react-app/src/components/pages/UserDashboard.jsx" afterDir="false" />
+    <list default="true" id="ec055c54-5b10-4bc9-a6f4-8a6b7c0c7abe" name="Changes" comment="feat: migrate from MySQL to MongoDB; update authentication response to include user role; add email configuration">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/barbershop-backend/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/barbershop-backend/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/barbershop-backend/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/barbershop-backend/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/dto/AuthResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/dto/AuthResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/dto/RegisterRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/dto/RegisterRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/repository/ShopRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/repository/ShopRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/security/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/security/JwtService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/service/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-react-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/my-react-app/src/components/pages/OwnerRegisterPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/components/pages/OwnerRegisterPage.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -60,6 +41,9 @@
     &quot;accountId&quot;: &quot;6e604fb1-5932-449e-bde0-124b13374e6f&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -152,7 +136,7 @@
       <updated>1774019705861</updated>
       <workItem from="1774176481868" duration="272000" />
       <workItem from="1774185791588" duration="5678000" />
-      <workItem from="1774272121798" duration="322000" />
+      <workItem from="1774272121798" duration="965000" />
     </task>
     <task id="LOCAL-00001" summary="properties">
       <option name="closed" value="true" />
@@ -162,7 +146,23 @@
       <option name="project" value="LOCAL" />
       <updated>1774086940064</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="feat: implement MongoDB integration and add audit log functionality; create email service for password reset">
+      <option name="closed" value="true" />
+      <created>1774272530008</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1774272530009</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat: migrate from MySQL to MongoDB; update authentication response to include user role; add email configuration">
+      <option name="closed" value="true" />
+      <created>1774272629624</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1774272629624</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,7 +181,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="properties" />
-    <option name="LAST_COMMIT_MESSAGE" value="properties" />
+    <MESSAGE value="feat: implement MongoDB integration and create audit log functionality; add email service for password reset" />
+    <MESSAGE value="feat: migrate from MySQL to MongoDB; update authentication response to include user role; add email configuration" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: migrate from MySQL to MongoDB; update authentication response to include user role; add email configuration" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

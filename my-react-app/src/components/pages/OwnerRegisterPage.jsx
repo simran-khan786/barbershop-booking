@@ -2,7 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 function RegisterPage({ onNavigate }) {
-  const [role, setRole] = useState("User"); // ✅ kept (no UI change)
+
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
