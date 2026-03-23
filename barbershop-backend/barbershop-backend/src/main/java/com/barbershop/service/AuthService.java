@@ -27,8 +27,7 @@ public class AuthService {
                 .name(request.getFirstName() + " " + request.getLastName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-<<<<<<< HEAD
-                .role(Role.USER) // ✅ FIXED
+                .role(Role.USER)
                 .build();
 
         repository.save(user);
@@ -48,17 +47,14 @@ public class AuthService {
                 .name(request.getFirstName() + " " + request.getLastName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.OWNER) // ✅ FIXED
-=======
-                .role(Role.USER)
->>>>>>> a0b73ffadab2a65174a54ef40e30f365b94d424a
+                .role(Role.OWNER)
                 .build();
 
         repository.save(user);
 
         String token = jwtService.generateToken(user.getEmail());
 
-        return new AuthResponse(token);
+        return new AuthResponse(token, user.getRole().name());
     }
 
     public AuthResponse login(LoginRequest request){
@@ -71,7 +67,7 @@ public class AuthService {
         }
 
         String token = jwtService.generateToken(user.getEmail());
-        return new AuthResponse(token);
 
+        return new AuthResponse(token, user.getRole().name());
     }
 }

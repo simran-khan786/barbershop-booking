@@ -5,15 +5,48 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec055c54-5b10-4bc9-a6f4-8a6b7c0c7abe" name="Changes" comment="properties">
+      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.ask.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.ask2agent.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.edit.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my-react-app/src/components/pages/UserDashboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barbershop-backend/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/barbershop-backend/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barbershop-backend/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/barbershop-backend/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/dto/AuthResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/dto/AuthResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/dto/RegisterRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/dto/RegisterRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/repository/ShopRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/repository/ShopRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/security/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/security/JwtService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/java/com/barbershop/service/AuthService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/barbershop-backend/barbershop-backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-react-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-react-app/src/components/pages/OwnerRegisterPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-react-app/src/components/pages/OwnerRegisterPage.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_C:/Users/simra/WebstormProjects/barbershop-booking" value="3BDNVguctPpOnBVW3WcweVSW5Rv" />
+    </persistenceIdMap>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JSX File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -24,7 +57,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/simran-khan786/barbershop-booking.git&quot;,
-    &quot;accountId&quot;: &quot;a7283661-e4db-4ae1-8f84-a6bce5a1b10f&quot;
+    &quot;accountId&quot;: &quot;6e604fb1-5932-449e-bde0-124b13374e6f&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -38,18 +71,42 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.BarbershopBackendApplication.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "mongodb",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "debug-errors",
+    "javascript.preferred.runtime.type.id": "node",
+    "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/asus/Downloads/barbershop-booking",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.dev.executor": "Run",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="ReactDesignerToolWindowState">
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.intellij.reactbuddy.reactComponents" value="false" />
+        <entry key="com.intellij.reactbuddy.reactInspector" value="false" />
+        <entry key="com.intellij.reactbuddy.storybook" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="RunManager" selected="npm.dev">
     <configuration name="BarbershopBackendApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.barbershop.BarbershopBackendApplication" />
       <module name="barbershop-backend" />
@@ -63,11 +120,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/my-react-app/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.BarbershopBackendApplication" />
+        <item itemvalue="npm.dev" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-c7e53b3be11b-JavaScript-WS-253.28294.332" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -76,6 +150,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1774019705861</updated>
+      <workItem from="1774176481868" duration="272000" />
+      <workItem from="1774185791588" duration="5678000" />
+      <workItem from="1774272121798" duration="322000" />
     </task>
     <task id="LOCAL-00001" summary="properties">
       <option name="closed" value="true" />
@@ -88,8 +165,30 @@
     <option name="localTasksCounter" value="2" />
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="properties" />
     <option name="LAST_COMMIT_MESSAGE" value="properties" />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
   </component>
 </project>
