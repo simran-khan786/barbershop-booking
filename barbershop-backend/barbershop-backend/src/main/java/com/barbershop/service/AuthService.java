@@ -76,7 +76,7 @@ public class AuthService {
         String token = jwtService.generateToken(user.getEmail());
 
         return new AuthResponse(token, user.getRole().name());
-<<<<<<< HEAD
+
     }
 
     // 🔐 FORGOT PASSWORD
@@ -112,7 +112,6 @@ public class AuthService {
         user.setTokenExpiry(null);
 
         repository.save(user);
-=======
->>>>>>> 5a7d2a83293840a71efa8973dfd5ed59e7d1f1ca
+ 
     }
 }

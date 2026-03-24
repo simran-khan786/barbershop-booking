@@ -5,10 +5,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 5a7d2a83293840a71efa8973dfd5ed59e7d1f1ca
 @Service
 @RequiredArgsConstructor
 public class EmailService {
