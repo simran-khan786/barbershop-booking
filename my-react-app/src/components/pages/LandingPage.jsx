@@ -1,7 +1,7 @@
-import Footer from "../organisms/Footer.jsx";
+ import Footer from "../organisms/Footer.jsx";
 import Navbar from "../organisms/Navbar.jsx";
 
-function LandingPage({ onNavigate }) {
+function LandingPage({ onNavigate, theme, setTheme }) {
   return (
     <div className="relative overflow-hidden">
       <div className="pointer-events-none absolute -left-20 top-24 h-72 w-72 rounded-full bg-[var(--orb-1)] opacity-45 blur-3xl" />
@@ -11,6 +11,16 @@ function LandingPage({ onNavigate }) {
 
       <main className="mx-auto flex min-h-screen w-full max-w-none flex-col gap-14 px-0 pb-24 pt-0">
         <section id="home" className="relative min-h-screen w-full overflow-hidden bg-[var(--surface)]">
+          {/* ✅ TOGGLE BUTTON ADDED */}
+          <button
+            onClick={() =>
+              setTheme(theme === "dark" ? "light" : "dark")
+            }
+            className="absolute top-6 right-6 z-50 px-4 py-2 rounded-full bg-white text-black text-xs shadow"
+          >
+            {theme === "dark" ? "Light" : "Dark"}
+          </button>
+
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{
@@ -30,7 +40,7 @@ function LandingPage({ onNavigate }) {
               Premium men's grooming services delivered by master barbers in a modern,
               masculine environment. Experience the art of the perfect cut.
             </p>
-<div className="mt-10 w-full overflow-hidden">
+<div className="mt-10 w-full  overflow-x-auto">
   <div className="flex gap-6 animate-scroll whitespace-nowrap">
 
     {[
@@ -43,57 +53,110 @@ function LandingPage({ onNavigate }) {
       {
         name: "Hair Cutting & Styling",
         location: "Prem Nagar, Gwalior",
-        price: "₹549",
+       rating: "⭐ 4.5",
         img: "https://thumbs.dreamstime.com/b/barber-shop-men-hair-cut-barber-doing-men-fashion-hairstyle-barber-shop-men-hair-cut-barber-doing-men-fashion-hairstyle-cutting-121116869.jpg"
       },
       {
         name: "Razor Shave",
         location: "DD Nagar, Gwalior",
-        price: "₹799",
+                           rating: "⭐ 4.5",
         img: "https://tse4.mm.bing.net/th/id/OIP._Lg-zIjodxNc8FPOFecx0gHaE7?rs=1&pid=ImgDetMain&o=7&rm=3"
       },
       {
         name: "Facial Treatment",
         location: "Thatipur, Gwalior",
-        price: "₹599",
+                           rating: "4.5",
+  price: "₹299",
         img: "https://image.shutterstock.com/z/stock-photo-barber-applying-purifying-mask-on-his-client-face-583807252.jpg"
       },
       {
         name: "Hair Coloring & Highlights",
         location: "Thatipur, Gwalior",
-        price: "₹599",
+        rating: "⭐ 4.5",
         img: "https://www.apetogentleman.com/wp-content/uploads/2022/03/hair-dye-men-salon-800x534.jpg",
       },
       {
         name: "Hair Wash & Scalp Massage",
         location: "DD Nagar, Gwalior",
-        price: "₹799",
+                           rating: "⭐ 4.5",
         img: "https://images.squarespace-cdn.com/content/v1/5db8681c68eae7671fe4cc2e/9d71f2ee-3a3a-40eb-87f1-d4a6420d6d41/Gentleman's+Barber+Spa+NYC+wash.jpeg?format=1500w"
       },
       {
         name: "Hair Spa",
         location: "DD Nagar, Gwalior",
-        price: "₹799",
+                            rating: "⭐ 4.5",
+        img: "https://mensroomspa.com/wp-content/uploads/2022/11/the-mens-room-barber-lounge-and-spa-in-rochester-ny.jpg"
+      },
+
+      {
+        name: "Hair Spa",
+        location: "DD Nagar, Gwalior",
+                            rating: "⭐ 4.5",
+        img: "https://mensroomspa.com/wp-content/uploads/2022/11/the-mens-room-barber-lounge-and-spa-in-rochester-ny.jpg"
+      },
+
+      {
+        name: "Hair Spa",
+        location: "DD Nagar, Gwalior",
+                            rating: "⭐ 4.5",
+        img: "https://mensroomspa.com/wp-content/uploads/2022/11/the-mens-room-barber-lounge-and-spa-in-rochester-ny.jpg"
+      },
+      {
+        name: "Hair Spa",
+        location: "DD Nagar, Gwalior",
+                            rating: "⭐ 4.5",
         img: "https://mensroomspa.com/wp-content/uploads/2022/11/the-mens-room-barber-lounge-and-spa-in-rochester-ny.jpg"
       },
     ].map((card, i) => (
-      <div
-        key={i}
-        className="min-w-[260px] max-w-[260px] rounded-2xl overflow-hidden bg-[#1c1d22] border border-white/10 shadow-lg"
-      >
-        <img src={card.img} className="h-36 w-full object-cover" />
-        <div className="p-4 text-left">
-          <p className="text-white text-sm font-semibold">{card.name}</p>
-          <p className="text-white/60 text-xs mt-1">{card.location}</p>
-          <p className="text-[var(--accent)] text-sm mt-2 font-semibold">
-            {card.price}
-          </p>
-        </div>
-      </div>
+     <div
+  key={i}
+  className="min-w-[280px] max-w-[280px] rounded-2xl overflow-hidden 
+  bg-gradient-to-r from-[#1c1d22] to-[#2a2b31] 
+  border border-white/10 shadow-lg p-4"
+>
+  <img
+      src={card.img}
+      className="h-36 w-full object-cover"
+    />
+
+  <p className="text-white font-semibold text-sm">
+    {card.name}
+  </p>
+
+  <p className="text-white/60 text-xs mt-1">
+    📍 {card.location}
+  </p>
+
+  {/* rating */}
+  <div className="flex items-center gap-2 mt-2">
+    <span className="text-yellow-400">⭐⭐⭐⭐</span>
+    <span className="text-yellow-400 text-sm font-semibold">
+      {card.rating || "4.0"}
+    </span>
+    <span className="text-white/50 text-xs">
+      (84 reviews)
+    </span>
+  </div>
+
+  {/* price + button row */}
+  <div className="flex items-center justify-between mt-4">
+    <p className="text-[var(--accent)] font-bold text-lg">
+      {card.price || "₹699"}
+    </p>
+
+    <button
+      onClick={() => onNavigate("register")}
+      className="bg-[var(--accent)] text-black text-xs px-4 py-2 rounded-full font-semibold hover:scale-105 transition"
+    >
+      Book Now
+    </button>
+  </div>
+</div>
     ))}
 
   </div>
 </div>
+
           </div>
         </section>
 
