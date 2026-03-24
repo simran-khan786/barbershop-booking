@@ -8,9 +8,8 @@ import ResetPasswordPage from "./components/pages/ResetPasswordPage.jsx";
 import OwnerDashboard from "./components/pages/OwnerDashboard.jsx";
  
 
-import { Toaster } from "react-hot-toast"; // ✅ IMPORT
+import { Toaster } from "react-hot-toast";
 
-// ROUTES (VALUES = SAME STRING USED IN NAVIGATION)
 const ROUTES = {
   landing: "landing",
   login: "login",
@@ -18,26 +17,26 @@ const ROUTES = {
   home: "home",
   resetPassword: "resetPassword",
   owner: "owner",
-  ownerRegister: "owner-register", // ✅ IMPORTANT
+  ownerRegister: "owner-register",
 };
 
 function App() {
   const [route, setRoute] = useState(ROUTES.landing);
 
+  const [theme, setTheme] = useState("dark");
+
   useEffect(() => {
-    document.documentElement.dataset.theme = "dark";
+    document.documentElement.setAttribute("data-theme", theme);
+    document.body.setAttribute("data-theme", theme);
 
     const path = window.location.pathname;
 
     if (path === "/reset-password") {
       setRoute(ROUTES.resetPassword);
     }
-  }, []);
+  }, [theme]);
 
-  // ✅ FIXED NAVIGATION
   const handleNavigate = (next) => {
-    console.log("NAVIGATE TO:", next); // debug
-
     if (Object.values(ROUTES).includes(next)) {
       setRoute(next);
 
@@ -52,46 +51,72 @@ function App() {
   const content = useMemo(() => {
     switch (route) {
       case ROUTES.login:
-        return <LoginPage onNavigate={handleNavigate} />;
+        return (
+          <LoginPage
+            onNavigate={handleNavigate}
+            theme={theme}
+            setTheme={setTheme}
+          />
+        );
 
       case ROUTES.register:
-        return <RegisterPage onNavigate={handleNavigate} />;
+        return (
+          <RegisterPage
+            onNavigate={handleNavigate}
+            theme={theme}
+            setTheme={setTheme}
+          />
+        );
 
       case ROUTES.home:
-        return <HomePage onNavigate={handleNavigate} />;
+        return (
+          <HomePage
+            onNavigate={handleNavigate}
+            theme={theme}
+            setTheme={setTheme}
+          />
+        );
 
       case ROUTES.resetPassword:
         return <ResetPasswordPage />;
 
       case ROUTES.owner:
-        return <OwnerDashboard onNavigate={handleNavigate} />;
+        return (
+          <OwnerDashboard
+            onNavigate={handleNavigate}
+            theme={theme}
+            setTheme={setTheme}
+          />
+        );
 
       case ROUTES.ownerRegister:
+<<<<<<< HEAD
         return <OwnerRegisterPage_clean onNavigate={handleNavigate} />;
+=======
+        return (
+          <OwnerRegisterPage
+            onNavigate={handleNavigate}
+            theme={theme}
+            setTheme={setTheme}
+          />
+        );
+>>>>>>> 5a7d2a83293840a71efa8973dfd5ed59e7d1f1ca
 
       default:
-        return <LandingPage onNavigate={handleNavigate} />;
+        return (
+          <LandingPage
+            onNavigate={handleNavigate}
+            theme={theme}
+            setTheme={setTheme}
+          />
+        );
     }
-  }, [route]);
+  }, [route, theme]);
 
   return (
     <div className="min-h-screen bg-[var(--page-bg)] text-[var(--page-text)]">
 
-      {/* ✅ GLOBAL TOASTER (IMPORTANT) */}
-      <Toaster
-        position="top-right"
-        toastOptions={{
-          duration: 2500,
-          style: {
-            background: "#1c1d22",
-            color: "#ffffff",
-            border: "1px solid rgba(255,255,255,0.1)",
-            borderRadius: "12px",
-            padding: "12px 16px",
-            fontSize: "14px",
-          },
-        }}
-      />
+      <Toaster />
 
       {content}
     </div>

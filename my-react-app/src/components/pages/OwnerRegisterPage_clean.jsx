@@ -2,10 +2,14 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 function RegisterPage({ onNavigate }) {
+<<<<<<< HEAD:my-react-app/src/components/pages/OwnerRegisterPage_clean.jsx
   const [role, setRole] = useState("User"); // ✅ kept (no UI change)
 
 function RegisterPage({ onNavigate }) {
   const [role, setRole] = useState("User");
+=======
+
+>>>>>>> 5a7d2a83293840a71efa8973dfd5ed59e7d1f1ca:my-react-app/src/components/pages/OwnerRegisterPage.jsx
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -39,12 +43,12 @@ function RegisterPage({ onNavigate }) {
       const data = await res.json();
 
       if (res.ok) {
-  toast.success("Owner Registered Successfully ✅");
+        toast.success("Owner Registered Successfully ✅");
 
-  // ⏳ delay before redirect
-  setTimeout(() => {
-    onNavigate("login");
-  }, 2500);
+        // ⏳ delay before redirect
+        setTimeout(() => {
+          onNavigate("login");
+        }, 2500);
 
       } else {
         alert(data);
@@ -55,6 +59,7 @@ function RegisterPage({ onNavigate }) {
       alert("Server Error ❌");
     }
   };
+<<<<<<< HEAD:my-react-app/src/components/pages/OwnerRegisterPage_clean.jsx
   if (password !== confirmPassword) {
     alert("Passwords do not match ❌");
     return;
@@ -89,6 +94,8 @@ function RegisterPage({ onNavigate }) {
     alert("Server Error ❌");
   }
 };
+=======
+>>>>>>> 5a7d2a83293840a71efa8973dfd5ed59e7d1f1ca:my-react-app/src/components/pages/OwnerRegisterPage.jsx
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#0f0f12]">
@@ -128,7 +135,7 @@ function RegisterPage({ onNavigate }) {
 
             <div className="mt-8 rounded-[28px] border border-white/10 bg-[#1c1d22] p-6 text-left shadow-[0_30px_80px_-40px_rgba(0,0,0,0.6)] md:p-8">
               <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-                
+
                 <div className="grid gap-4 md:grid-cols-2">
                   <div>
                     <label className="text-xs uppercase tracking-[0.2em] text-white/60">
@@ -208,7 +215,10 @@ function RegisterPage({ onNavigate }) {
                   />
                 </div>
 
+<<<<<<< HEAD:my-react-app/src/components/pages/OwnerRegisterPage_clean.jsx
 
+=======
+>>>>>>> 5a7d2a83293840a71efa8973dfd5ed59e7d1f1ca:my-react-app/src/components/pages/OwnerRegisterPage.jsx
                 <button
                   onClick={handleRegister}
                   className="w-full rounded-full bg-gradient-to-r from-[#c24c1a] via-[#e26a2c] to-[#f7a23b] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[#f7a23b]/30 transition-transform duration-300 ease-out hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f7a23b]/40"

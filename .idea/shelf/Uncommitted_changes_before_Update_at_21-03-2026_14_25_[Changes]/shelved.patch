@@ -1,0 +1,75 @@
+Index: barbershop-backend/barbershop-backend/pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n\txsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n\t<modelVersion>4.0.0</modelVersion>\r\n\t<parent>\r\n\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t<artifactId>spring-boot-starter-parent</artifactId>\r\n\t\t<version>4.0.3</version>\r\n\t\t<relativePath/> <!-- lookup parent from repository -->\r\n\t</parent>\r\n\t<groupId>com.barbershop</groupId>\r\n\t<artifactId>barbershop-backend</artifactId>\r\n\t<version>0.0.1-SNAPSHOT</version>\r\n\t<name>barbershop-backend</name>\r\n\t<description>Barbershop Booking and Salon Management System</description>\r\n\t<url/>\r\n\t<licenses>\r\n\t\t<license/>\r\n\t</licenses>\r\n\t<developers>\r\n\t\t<developer/>\r\n\t</developers>\r\n\t<scm>\r\n\t\t<connection/>\r\n\t\t<developerConnection/>\r\n\t\t<tag/>\r\n\t\t<url/>\r\n\t</scm>\r\n\t<properties>\r\n\t\t<java.version>17</java.version>\r\n\t</properties>\r\n\t<dependencies>\r\n<!--\t\t<dependency>-->\r\n<!--\t\t\t<groupId>org.springframework.boot</groupId>-->\r\n<!--\t\t\t<artifactId>spring-boot-starter-data-jpa</artifactId>-->\r\n<!--\t\t</dependency>-->\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-starter-security</artifactId>\r\n\t\t</dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-starter-validation</artifactId>\r\n\t\t</dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-starter-webmvc</artifactId>\r\n\t\t</dependency>\r\n\r\n<!--\t\t<dependency>-->\r\n<!--\t\t\t<groupId>com.mysql</groupId>-->\r\n<!--\t\t\t<artifactId>mysql-connector-j</artifactId>-->\r\n<!--\t\t\t<scope>runtime</scope>-->\r\n<!--\t\t</dependency>-->\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-data-mongodb</artifactId>\r\n        </dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.projectlombok</groupId>\r\n\t\t\t<artifactId>lombok</artifactId>\r\n\t\t\t<optional>true</optional>\r\n\t\t</dependency>\r\n<!--\t\t<dependency>-->\r\n<!--\t\t\t<groupId>org.springframework.boot</groupId>-->\r\n<!--\t\t\t<artifactId>spring-boot-starter-data-jpa-test</artifactId>-->\r\n<!--\t\t\t<scope>test</scope>-->\r\n<!--\t\t</dependency>-->\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-starter-security-test</artifactId>\r\n\t\t\t<scope>test</scope>\r\n\t\t</dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-starter-validation-test</artifactId>\r\n\t\t\t<scope>test</scope>\r\n\t\t</dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-starter-webmvc-test</artifactId>\r\n\t\t\t<scope>test</scope>\r\n\t\t</dependency>\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-mail</artifactId>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>io.jsonwebtoken</groupId>\r\n            <artifactId>jjwt-api</artifactId>\r\n            <version>0.11.5</version>\r\n        </dependency>\r\n\r\n        <dependency>\r\n            <groupId>io.jsonwebtoken</groupId>\r\n            <artifactId>jjwt-impl</artifactId>\r\n            <version>0.11.5</version>\r\n            <scope>runtime</scope>\r\n        </dependency>\r\n\r\n        <dependency>\r\n            <groupId>io.jsonwebtoken</groupId>\r\n            <artifactId>jjwt-jackson</artifactId>\r\n            <version>0.11.5</version>\r\n            <scope>runtime</scope>\r\n        </dependency>\r\n\t</dependencies>\r\n\r\n\t<build>\r\n\t\t<plugins>\r\n\t\t\t<plugin>\r\n\t\t\t\t<groupId>org.apache.maven.plugins</groupId>\r\n\t\t\t\t<artifactId>maven-compiler-plugin</artifactId>\r\n\t\t\t\t<configuration>\r\n\t\t\t\t\t<annotationProcessorPaths>\r\n\t\t\t\t\t\t<path>\r\n\t\t\t\t\t\t\t<groupId>org.projectlombok</groupId>\r\n\t\t\t\t\t\t\t<artifactId>lombok</artifactId>\r\n\t\t\t\t\t\t</path>\r\n\t\t\t\t\t</annotationProcessorPaths>\r\n\t\t\t\t</configuration>\r\n\t\t\t</plugin>\r\n\t\t\t<plugin>\r\n\t\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t\t<artifactId>spring-boot-maven-plugin</artifactId>\r\n\t\t\t\t<configuration>\r\n\t\t\t\t\t<excludes>\r\n\t\t\t\t\t\t<exclude>\r\n\t\t\t\t\t\t\t<groupId>org.projectlombok</groupId>\r\n\t\t\t\t\t\t\t<artifactId>lombok</artifactId>\r\n\t\t\t\t\t\t</exclude>\r\n\t\t\t\t\t</excludes>\r\n\t\t\t\t</configuration>\r\n\t\t\t</plugin>\r\n\t\t</plugins>\r\n\t</build>\r\n\r\n</project>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/barbershop-backend/barbershop-backend/pom.xml b/barbershop-backend/barbershop-backend/pom.xml
+--- a/barbershop-backend/barbershop-backend/pom.xml	(revision 4a8e47008997b455d27860c9500013bf9363c672)
++++ b/barbershop-backend/barbershop-backend/pom.xml	(date 1774014742509)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
++		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 	<modelVersion>4.0.0</modelVersion>
+ 	<parent>
+ 		<groupId>org.springframework.boot</groupId>
+@@ -81,29 +81,35 @@
+ 			<artifactId>spring-boot-starter-webmvc-test</artifactId>
+ 			<scope>test</scope>
+ 		</dependency>
+-        <dependency>
+-            <groupId>org.springframework.boot</groupId>
+-            <artifactId>spring-boot-starter-mail</artifactId>
+-        </dependency>
+-        <dependency>
+-            <groupId>io.jsonwebtoken</groupId>
+-            <artifactId>jjwt-api</artifactId>
+-            <version>0.11.5</version>
+-        </dependency>
++		<dependency>
++			<groupId>org.springframework.boot</groupId>
++			<artifactId>spring-boot-starter-mail</artifactId>
++		</dependency>
++
++		<dependency>
++			<groupId>org.springframework.boot</groupId>
++			<artifactId>spring-boot-starter-data-mongodb</artifactId>
++		</dependency>
++
++		<dependency>
++			<groupId>io.jsonwebtoken</groupId>
++			<artifactId>jjwt-api</artifactId>
++			<version>0.11.5</version>
++		</dependency>
+ 
+-        <dependency>
+-            <groupId>io.jsonwebtoken</groupId>
+-            <artifactId>jjwt-impl</artifactId>
+-            <version>0.11.5</version>
+-            <scope>runtime</scope>
+-        </dependency>
++		<dependency>
++			<groupId>io.jsonwebtoken</groupId>
++			<artifactId>jjwt-impl</artifactId>
++			<version>0.11.5</version>
++			<scope>runtime</scope>
++		</dependency>
+ 
+-        <dependency>
+-            <groupId>io.jsonwebtoken</groupId>
+-            <artifactId>jjwt-jackson</artifactId>
+-            <version>0.11.5</version>
+-            <scope>runtime</scope>
+-        </dependency>
++		<dependency>
++			<groupId>io.jsonwebtoken</groupId>
++			<artifactId>jjwt-jackson</artifactId>
++			<version>0.11.5</version>
++			<scope>runtime</scope>
++		</dependency>
+ 	</dependencies>
+ 
+ 	<build>
