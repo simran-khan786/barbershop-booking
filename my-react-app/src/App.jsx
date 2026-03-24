@@ -6,6 +6,7 @@ import RegisterPage from "./components/pages/RegisterPage.jsx";
 import HomePage from "./components/pages/HomePage.jsx";
 import ResetPasswordPage from "./components/pages/ResetPasswordPage.jsx";
 import OwnerDashboard from "./components/pages/OwnerDashboard.jsx";
+import OwnerRegisterPage from "./components/pages/OwnerRegisterPage_clean";
  
 
 import { Toaster } from "react-hot-toast";
@@ -90,9 +91,6 @@ function App() {
         );
 
       case ROUTES.ownerRegister:
-<<<<<<< HEAD
-        return <OwnerRegisterPage_clean onNavigate={handleNavigate} />;
-=======
         return (
           <OwnerRegisterPage
             onNavigate={handleNavigate}
@@ -100,7 +98,6 @@ function App() {
             setTheme={setTheme}
           />
         );
->>>>>>> 5a7d2a83293840a71efa8973dfd5ed59e7d1f1ca
 
       default:
         return (
