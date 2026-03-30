@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react";
+
+import { useMemo, useState, useEffect } from "react";
 import {
   ArrowRight,
   Filter,
@@ -11,105 +12,125 @@ import {
 
 const FILTERS = ["All", "Near Me", "Hair Cut", "Beard", "Spa"];
 
-const FEATURED_SALONS = [
-  {
-    id: 1,
-    name: "Velvet Cut Studio",
-    location: "City Center, Gwalior",
-    distance: "1.2 km",
-    rating: 4.9,
-    price: "₹699",
-    tag: "Top Rated",
-    image:
-      "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=1200&q=80",
-    services: ["Hair Cut", "Beard", "Spa"],
-  },
-  {
-    id: 2,
-    name: "House of Fade",
-    location: "Prem Nagar, Gwalior",
-    distance: "2.0 km",
-    rating: 4.8,
-    price: "₹549",
-    tag: "New",
-    image:
-      "https://images.unsplash.com/photo-1517832606299-7ae9b720a186?auto=format&fit=crop&w=1200&q=80",
-    services: ["Hair Cut", "Facial", "Beard"],
-  },
-  {
-    id: 3,
-    name: "Amber Grooming Club",
-    location: "DD Nagar, Gwalior",
-    distance: "3.4 km",
-    rating: 4.7,
-    price: "₹799",
-    tag: "Top Rated",
-    image:
-      "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=1200&q=80",
-    services: ["Spa", "Hair Cut", "Head Massage"],
-  },
-];
-
-const NEARBY_SALONS = [
-  {
-    id: 11,
-    name: "The Modern Barber",
-    location: "Morar, Gwalior",
-    distance: "0.9 km",
-    rating: 4.8,
-    priceRange: "₹399 - ₹899",
-    image:
-      "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=900&q=80",
-    services: ["Hair Cut", "Facial", "Beard Trim"],
-  },
-  {
-    id: 12,
-    name: "Trim & Tone Lounge",
-    location: "Thatipur, Gwalior",
-    distance: "1.5 km",
-    rating: 4.6,
-    priceRange: "₹349 - ₹749",
-    image:
-      "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80",
-    services: ["Hair Cut", "Spa", "Cleanup"],
-  },
-  {
-    id: 13,
-    name: "Royal Blade Salon",
-    location: "Lashkar, Gwalior",
-    distance: "2.3 km",
-    rating: 4.9,
-    priceRange: "₹499 - ₹1,099",
-    image:
-      "https://images.unsplash.com/photo-1512690459411-b0fd1c2d4d1f?auto=format&fit=crop&w=900&q=80",
-    services: ["Beard", "Hair Cut", "Keratin"],
-  },
-  {
-    id: 14,
-    name: "Glow & Groom",
-    location: "Kila Gate Road, Gwalior",
-    distance: "2.8 km",
-    rating: 4.7,
-    priceRange: "₹299 - ₹699",
-    image:
-      "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=900&q=80",
-    services: ["Spa", "Facial", "Hair Cut"],
-  },
-];
-
-function HomePage({ onNavigate }) {
+function HomePage({ onNavigate, setSelectedSalon}) {
   const [activeFilter, setActiveFilter] = useState("All");
   const [query, setQuery] = useState("");
-
+  const [shops, setShops] = useState([]);
+  const [radius, setRadius] = useState(5);
+  const [nearbyShops, setNearbyShops] = useState([]);
+  const [userLocation, setUserLocation] = useState(null);
   const normalizedQuery = query.trim().toLowerCase();
+  const mappedShops = shops.map((shop, index) => ({
+  id: index,
+  name: shop.shopName,
+  location: shop.city,
+  distance: shop.distance !== undefined
+    ? (shop.distance < 1
+        ? (shop.distance * 1000).toFixed(0) + " m"
+        : shop.distance.toFixed(1) + " km")
+    : "N/A",
+  rating: 4.5,
+  price: "₹499",
+  tag: "Popular",
+  image: shop.imageUrl && shop.imageUrl !== ""
+  ? shop.imageUrl
+  : "https://via.placeholder.com/300",
+  services: shop.services?.map(s => s.serviceName) || []
+}));
+const mappedNearbyShops = nearbyShops.map((shop, index) => ({
+  id: index,
+  name: shop.shopName,
+  location: shop.city,
+  distance: shop.distance !== undefined
+  ? (shop.distance < 1 
+      ? (shop.distance * 1000).toFixed(0) + " m"
+      : shop.distance.toFixed(1) + " km")
+  : "N/A",
+  rating: 4.5,
+  priceRange: "₹399 - ₹999",
+  image: shop.imageUrl && shop.imageUrl !== ""
+  ? shop.imageUrl
+  : "https://via.placeholder.com/300",
+  services: shop.services?.map(s => s.serviceName) || []
+}));
+
+useEffect(() => {
+  const fetchShops = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const res = await fetch("http://localhost:8080/api/shops", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await res.json();
+      setShops(data);
+
+    } catch (err) {
+      console.error("Error fetching shops", err);
+    }
+  };
+
+  fetchShops();
+}, []);
+   
+const handleGetLocation = () => {
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      const loc = {
+        lat: pos.coords.latitude,
+        lng: pos.coords.longitude,
+      };
+
+      setUserLocation(loc);
+    },
+    () => {
+      alert("Location permission denied ❌");
+    }
+  );
+};
+
+// 2️⃣ Fetch nearby AFTER location
+useEffect(() => {
+  if (!userLocation) return;
+
+  const fetchNearby = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const res = await fetch(
+  `http://localhost:8080/api/shops/nearby?lat=${userLocation.lat}&lng=${userLocation.lng}&radius=${radius}`,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
+      const data = await res.json();
+      setNearbyShops(data);
+
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  fetchNearby();
+}, [userLocation,radius]);
+ 
 
   const matchesFilter = (salon) => {
-    if (activeFilter === "All") return true;
-    if (activeFilter === "Near Me") return parseFloat(salon.distance) <= 2;
-    return salon.services.some((service) =>
-      service.toLowerCase().includes(activeFilter.toLowerCase())
-    );
-  };
+  if (activeFilter === "All") return true;
+
+  if (activeFilter === "Near Me") {
+    return salon.distance !== "N/A";
+  }
+
+  return salon.services.some((service) =>
+    service.toLowerCase().includes(activeFilter.toLowerCase())
+  );
+};
 
   const matchesSearch = (salon) =>
     normalizedQuery.length === 0 ||
@@ -120,19 +141,19 @@ function HomePage({ onNavigate }) {
     );
 
   const featuredSalons = useMemo(
-    () =>
-      FEATURED_SALONS.filter(
-        (salon) => matchesFilter(salon) && matchesSearch(salon)
-      ),
-    [activeFilter, normalizedQuery]
-  );
+  () => mappedShops.filter(
+    (salon) => matchesFilter(salon) && matchesSearch(salon)
+  ),
+  [mappedShops, activeFilter, normalizedQuery]
+);
 
-  const nearbySalons = useMemo(
-    () =>
-      NEARBY_SALONS.filter((salon) => matchesFilter(salon) && matchesSearch(salon)),
-    [activeFilter, normalizedQuery]
-  );
+const nearbySalons = useMemo(() => {
+  if (!userLocation) return [];
 
+  return mappedNearbyShops.filter(
+    (salon) => matchesFilter(salon) && matchesSearch(salon)
+  );
+}, [mappedNearbyShops, activeFilter, normalizedQuery, userLocation]);
   const handleLogout = () => {
     localStorage.removeItem("token");
     if (onNavigate) {
@@ -140,9 +161,10 @@ function HomePage({ onNavigate }) {
     }
   };
 
-  const handleBookAppointment = () => {
-    alert("Book appointment flow started.");
-  };
+  const handleBookAppointment = (salon) => {
+  setSelectedSalon(salon);   // data save karo
+  onNavigate("booking");     // page change karo
+};
 
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top,#2d2217_0%,#17181c_24%,#0c0d10_60%,#090a0c_100%)] text-white">
@@ -160,6 +182,21 @@ function HomePage({ onNavigate }) {
                 <h1 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
                   Pranav
                 </h1>
+                <div className="mt-2 flex items-center gap-3">
+             <button
+              onClick={handleGetLocation}
+               className="flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs text-white hover:bg-white/20 transition"
+               >
+               <MapPin size={14} />
+              {userLocation ? "📍 Location Enabled" : "Enable Location"}
+             </button>
+
+             {!userLocation && (
+            <span className="text-xs text-white/50">
+             Turn on location to see nearby shops
+               </span>
+             )}
+             </div>
                 <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-amber-300/15 bg-amber-400/10 px-3 py-1.5 text-xs font-medium text-amber-200 shadow-[0_10px_30px_-18px_rgba(251,191,36,0.8)] transition duration-300 hover:border-amber-300/25 hover:bg-amber-400/15">
                   <Sparkles size={14} />
                   Premium picks curated for you
@@ -175,6 +212,7 @@ function HomePage({ onNavigate }) {
                 >
                   Logout
                 </button>
+   
                 <button
                   className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/10 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.5)] transition duration-300 hover:-translate-y-0.5 hover:scale-[1.03] hover:border-white/20 hover:bg-white/15 active:scale-[0.98]"
                   type="button"
@@ -290,14 +328,18 @@ function HomePage({ onNavigate }) {
 
                     <div className="space-y-4 p-4">
                       <div className="flex items-center justify-between">
-                        <div className="inline-flex items-center gap-1.5 text-sm font-medium text-amber-300 transition duration-300 group-hover:translate-x-0.5">
-                          <Star size={15} className="fill-amber-300 text-amber-300" />
-                          {salon.rating}
-                        </div>
-                        <p className="text-base font-semibold text-white">
-                          {salon.price}
-                        </p>
-                      </div>
+  <div className="inline-flex items-center gap-1.5 text-sm font-medium text-amber-300">
+    <Star size={15} className="fill-amber-300 text-amber-300" />
+    {salon.rating}
+  </div>
+
+  <button
+    onClick={() => handleBookAppointment(salon)}
+    className="bg-gradient-to-r from-[#f7a23b] to-[#b85a21] px-4 py-1.5 rounded-full text-xs font-semibold text-black hover:scale-105 transition"
+  >
+    Book Now
+  </button>
+</div>
 
                       <div className="flex flex-wrap gap-2">
                         {salon.services.map((service) => (
@@ -340,6 +382,21 @@ function HomePage({ onNavigate }) {
                   <p className="mt-1 text-sm text-white/55">
                     Best options around your location
                   </p>
+                  <div className="flex gap-2 mb-4">
+  {[5, 10, 15, 20].map((r) => (
+    <button
+      key={r}
+      onClick={() => setRadius(r)}
+      className={`px-3 py-1 rounded-full text-xs ${
+        radius === r
+          ? "bg-white text-black"
+          : "bg-white/10 text-white"
+      }`}
+    >
+      {r} km
+    </button>
+  ))}
+</div>
                 </div>
                 <button className="text-sm font-medium text-white/65 transition hover:text-white">
                   See all
@@ -381,9 +438,18 @@ function HomePage({ onNavigate }) {
                           </div>
                         </div>
 
-                        <div className="hidden rounded-full bg-white/8 p-2 text-white/70 transition duration-300 group-hover:translate-x-1 group-hover:bg-white/12 group-hover:text-white sm:flex">
-                          <ArrowRight size={18} />
-                        </div>
+                        <div className="flex flex-col items-center gap-2">
+  <div className="rounded-full bg-white/8 p-2 text-white/70">
+    <ArrowRight size={18} />
+  </div>
+
+  <button
+    onClick={() => handleBookAppointment(salon)}
+    className="text-xs bg-[#f7a23b] text-black px-3 py-1 rounded-full hover:scale-105 transition"
+  >
+    Book Now
+  </button>
+</div>
                       </div>
 
                       <div className="mt-3 flex flex-wrap gap-2">
@@ -400,20 +466,23 @@ function HomePage({ onNavigate }) {
                     </div>
 
                     <button
-                      className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#111317] px-4 py-3 text-sm font-medium text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[#171a20] active:scale-[0.98] sm:hidden"
-                      type="button"
-                    >
-                      View
-                      <ArrowRight size={16} />
-                    </button>
+  onClick={() => handleBookAppointment(salon)}
+  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#f7a23b] px-4 py-3 text-sm font-medium text-black sm:hidden"
+>
+  Book Now
+</button>
                   </article>
                 ))}
 
-                {nearbySalons.length === 0 && (
-                  <div className="flex min-h-[160px] items-center justify-center rounded-2xl border border-dashed border-white/10 bg-white/5 text-sm text-white/55">
-                    No nearby salons found for this filter.
-                  </div>
-                )}
+                {!userLocation ? (
+  <div className="flex min-h-[160px] items-center justify-center rounded-2xl border border-dashed border-white/10 bg-white/5 text-sm text-white/55">
+    Enable location to see nearby salons 📍
+  </div>
+) : nearbySalons.length === 0 ? (
+  <div className="flex min-h-[160px] items-center justify-center rounded-2xl border border-dashed border-white/10 bg-white/5 text-sm text-white/55">
+    No nearby salons found in your area
+  </div>
+) : null}
               </div>
             </section>
           </div>

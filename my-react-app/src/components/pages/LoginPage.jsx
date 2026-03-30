@@ -18,6 +18,7 @@ function LoginPage({ onNavigate }) {
       setLoading(true);
 
       const res = await fetch("http://localhost:8080/api/auth/login", {
+        
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -26,6 +27,7 @@ function LoginPage({ onNavigate }) {
       });
 
       const data = await res.json();
+      console.log("LOGIN RESPONSE:", data);
 
       if (res.ok) {
   toast.success("Login Successful ✅");

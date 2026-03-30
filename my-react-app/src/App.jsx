@@ -7,6 +7,7 @@ import HomePage from "./components/pages/HomePage.jsx";
 import ResetPasswordPage from "./components/pages/ResetPasswordPage.jsx";
 import OwnerDashboard from "./components/pages/OwnerDashboard.jsx";
 import OwnerRegisterPage from "./components/pages/OwnerRegisterPage_clean";
+import BookingPage from "./components/pages/BookingPage.jsx";
  
 
 import { Toaster } from "react-hot-toast";
@@ -19,10 +20,12 @@ const ROUTES = {
   resetPassword: "resetPassword",
   owner: "owner",
   ownerRegister: "owner-register",
+  booking: "booking",
 };
 
 function App() {
   const [route, setRoute] = useState(ROUTES.landing);
+  const [selectedSalon, setSelectedSalon] = useState(null);
 
   const [theme, setTheme] = useState("dark");
 
@@ -72,12 +75,12 @@ function App() {
       case ROUTES.home:
         return (
           <HomePage
-            onNavigate={handleNavigate}
-            theme={theme}
-            setTheme={setTheme}
-          />
+  onNavigate={handleNavigate}
+  setSelectedSalon={setSelectedSalon}   // ✅ ADD
+  theme={theme}
+  setTheme={setTheme}
+/>
         );
-
       case ROUTES.resetPassword:
         return <ResetPasswordPage />;
 
@@ -98,6 +101,13 @@ function App() {
             setTheme={setTheme}
           />
         );
+        case ROUTES.booking:
+  return (
+    <BookingPage
+      salon={selectedSalon}   // ✅ pass data
+      onNavigate={handleNavigate}
+    />
+  );
 
       default:
         return (
