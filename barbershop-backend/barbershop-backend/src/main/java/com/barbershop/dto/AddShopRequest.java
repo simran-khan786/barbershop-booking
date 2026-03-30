@@ -1,5 +1,6 @@
 package com.barbershop.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import java.time.LocalTime;
 import java.util.List;
@@ -7,12 +8,20 @@ import java.util.List;
 @Data
 public class AddShopRequest {
 
+    @NotBlank(message = "Shop name is required")
     private String shopName;
+
+    @NotBlank(message = "Owner name is required")
     private String ownerName;
+
+    @NotBlank(message = "Phone is required")
     private String phoneNumber;
 
-    private String address;
+    @NotBlank(message = "City is required")
     private String city;
+
+
+    private String address;
     private String state;
     private String pincode;
 
@@ -20,6 +29,9 @@ public class AddShopRequest {
     private LocalTime closingTime;
     private LocalTime breakStart;
     private LocalTime breakEnd;
+
+    private double latitude;
+    private double longitude;
 
     private String imageUrl;
 

@@ -34,6 +34,10 @@ public class Shop {
     private LocalTime breakStart;
     private LocalTime breakEnd;
 
+    // LOCATION COORDINATES
+    private double latitude;
+    private double longitude;
+
     // IMAGE
     private String imageUrl;
 
@@ -41,5 +45,5 @@ public class Shop {
     private String userId; // store user ID instead of relation
 
     // SERVICES (Embedded)
-    private List<com.barbershop.entity.ShopService> services;
+    private List<ShopService> services;
 }

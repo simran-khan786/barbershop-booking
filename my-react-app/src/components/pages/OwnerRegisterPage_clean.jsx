@@ -3,7 +3,6 @@ import toast from "react-hot-toast";
 
 function RegisterPage({ onNavigate }) {
 
-
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
