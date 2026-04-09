@@ -1,184 +1,363 @@
 import { useState } from "react";
-import { ArrowLeft, Clock, MapPin, Star, Calendar, CheckCircle2, IndianRupee } from "lucide-react";
+import { ArrowLeft, Star, CheckCircle } from "lucide-react";
+
+const services = [
+  { name: "Haircut", icon: "✂️", duration: "30 min", price: 499, popular: true },
+  { name: "Massage", icon: "🕸️", duration: "45 min", price: 799, popular: false },
+  { name: "Shave",   icon: "🪒", duration: "20 min", price: 199, popular: false },
+  { name: "Facial",  icon: "🧖", duration: "45 min", price: 649, popular: false },
+];
+
+const steps = ["Service", "Date", "Time", "Barber", "Confirm", "Review"];
+
+const dates = [
+  { day: "Mon", date: 31, dots: ["blue","blue","blue"] },
+  { day: "Tue", date: 1,  dots: ["blue","green"] },
+  { day: "Tue", date: 1,  dots: ["blue","blue"], isToday: true },
+  { day: "Wed", date: 2,  dots: ["blue","gray"] },
+  { day: "Thu", date: 3,  dots: ["pink","red"] },
+  { day: "Fri", date: 4,  dots: ["pink","red"] },
+  { day: "Sat", date: 5,  dots: ["pink","red"] },
+];
+
+const dotColors = {
+  blue:  "#1E3A5F", // ✅ changed from #3b82f6
+  green: "#22c55e",
+  gray:  "#9ca3af",
+  pink:  "#f9a8d4",
+  red:   "#f87171",
+};
+
+const morningSlots   = ["10:00 AM","11:00 AM","12:00 PM","3:00 PM"];
+const afternoonSlots = [
+  { time: "12:00 PM", available: true  },
+  { time: "1:00 PM",  available: true  },
+  { time: "3:00 PM",  available: true  },
+  { time: "4:00 PM",  available: false },
+];
 
 function BookingPage({ salon, onNavigate }) {
-  const [selectedService, setSelectedService] = useState(null);
-  const [selectedTime, setSelectedTime] = useState(null);
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedService,  setSelectedService]  = useState(services[0]);
+  const [selectedDateIdx,  setSelectedDateIdx]  = useState(2);
+  const [selectedTime,     setSelectedTime]     = useState("12:00 PM");
+  const [currentStep]                           = useState(0);
+  const [btnHover,         setBtnHover]         = useState(false); // ✅ for hover effect
 
-  if (!salon) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#0c0d10] text-white">
-        <div className="animate-bounce text-4xl mb-4">🏠</div>
-        <p className="text-xl font-light tracking-wide opacity-60">No salon selected</p>
-      </div>
-    );
-  }
-
-  const timeSlots = [
-    "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", 
-    "03:00 PM", "04:00 PM", "05:00 PM"
-  ];
+  const salonName   = salon?.name     || "GoldenCut";
+  const salonRating = salon?.rating   || "4.5";
+  const salonSub    = salon?.subtitle || "Premium Grooming Studio";
+  const salonImage  = salon?.image    || null;
 
   return (
-    <div className="min-h-screen bg-[#0c0d10] text-slate-100 selection:bg-amber-500/30">
-      {/* Background Decorative Glows */}
-      <div className="fixed top-0 left-1/4 w-96 h-96 bg-amber-600/10 blur-[120px] pointer-events-none" />
-      <div className="fixed bottom-0 right-1/4 w-96 h-96 bg-orange-900/10 blur-[120px] pointer-events-none" />
+   <div className="min-h-screen bg-[#F5F7FA] font-sans"> {/* ✅ #F5F7FA */}
+      <div className="max-w-lg mx-auto bg-white min-h-screen flex flex-col relative">
 
-      <div className="relative max-w-2xl mx-auto px-5 py-8">
-        
-        {/* 🔙 Premium Header */}
-        <header className="flex items-center justify-between mb-8">
-          <button
-            onClick={() => onNavigate("home")}
-            className="group flex items-center justify-center w-12 h-12 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 active:scale-95"
-          >
-            <ArrowLeft className="w-5 h-5 text-white/80 group-hover:-translate-x-1 transition-transform" />
-          </button>
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">
-            Book Appointment
-          </h1>
-          <div className="w-12" /> {/* Spacer for symmetry */}
-        </header>
+        {/* ── Hero Header ── */}
+       <div className="bg-white px-4 pt-5 pb-4 border-b border-gray-100 shadow-sm relative">
 
-        {/* 🏪 Salon Hero Card */}
-        <div className="relative overflow-hidden bg-white/5 rounded-[2.5rem] p-5 mb-10 border border-white/10 backdrop-blur-md shadow-2xl">
-          <div className="relative group">
-            <img
-              src={salon.image}
-              alt={salon.name}
-              className="w-full h-56 object-cover rounded-[2rem] shadow-lg group-hover:scale-[1.02] transition-transform duration-500"
-            />
-            <div className="absolute top-4 right-4 px-3 py-1.5 bg-black/40 backdrop-blur-md rounded-full border border-white/20 flex items-center gap-1.5">
-              <Star size={14} className="fill-amber-400 text-amber-400" />
-              <span className="text-xs font-bold text-amber-50">{salon.rating}</span>
-            </div>
-          </div>
+         <button
+           onClick={() => onNavigate && onNavigate("home")}
+           className="absolute left-4 top-5 w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition"
+         >
+           <ArrowLeft size={18} className="text-gray-700" />
+         </button>
 
-          <div className="mt-6 px-2">
-            <h2 className="text-2xl font-bold tracking-tight">{salon.name}</h2>
-            <div className="flex items-center gap-2 text-sm text-white/50 mt-2">
-              <div className="p-1.5 rounded-lg bg-white/5">
-                <MapPin size={16} className="text-amber-500/70" />
+         <div className="flex flex-col items-center text-center gap-1">
+           <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center text-white">
+             ✂
+           </div>
+
+           <h1 className="text-xl font-bold text-[#1A1A1A]">{salonName}</h1> {/* ✅ #1A1A1A */}
+           <p className="text-sm text-[#6B7280]">{salonSub}</p> {/* ✅ #6B7280 */}
+
+           <div className="flex items-center gap-2 text-sm mt-1">
+             <Star size={14} className="fill-yellow-400 text-yellow-400" />
+             <span className="font-semibold text-gray-800">{salonRating}</span>
+             <span className="text-[#6B7280]">(120 reviews)</span> {/* ✅ */}
+
+             <span className="text-gray-300">•</span>
+
+             <span className="flex items-center gap-1 text-green-500 text-xs font-medium">
+               <span className="w-2 h-2 bg-green-500 rounded-full" />
+               Open Now
+             </span>
+           </div>
+         </div>
+       </div>
+
+
+        {/* ── Step Progress ── */}
+        <div className="px-4 pt-3 pb-2 border-b border-gray-100 overflow-x-auto">
+          <div className="flex items-center min-w-max">
+            {steps.map((step, i) => (
+              <div key={step} className="flex items-center">
+                <span
+                  className={`text-sm pb-1 whitespace-nowrap transition-all ${
+                    i === currentStep
+                      ? "font-bold text-[#1A1A1A] border-b-2 border-[#1E3A5F]" // ✅
+                      : i < currentStep
+                      ? "font-medium text-[#1E3A5F]" // ✅
+                      : "font-normal text-gray-400"
+                  }`}
+                >
+                  {step}
+                </span>
+                {i < steps.length - 1 && (
+                  <div className="w-5 h-px bg-gray-200 mx-1.5" />
+                )}
               </div>
-              {salon.location}
-            </div>
+            ))}
           </div>
         </div>
 
-        {/* ✂️ Section: Services */}
-        <section className="mb-10">
-          <div className="flex items-center gap-2 mb-4">
-            <div className="h-1 w-6 rounded-full bg-amber-500" />
-            <h3 className="text-lg font-medium text-white/90">Select Service</h3>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {salon.services.map((service, index) => {
-              const isActive = selectedService === service;
-              return (
-                <button
-                  key={index}
-                  onClick={() => setSelectedService(service)}
-                  className={`relative overflow-hidden px-4 py-4 rounded-2xl text-sm font-medium transition-all duration-300 border ${
-                    isActive
-                      ? "bg-amber-500 border-amber-400 text-black shadow-[0_0_20px_rgba(245,158,11,0.3)]"
-                      : "bg-white/5 border-white/10 text-white/70 hover:bg-white/10 hover:border-white/20"
-                  }`}
-                >
-                  {service}
-                  {isActive && <CheckCircle2 size={14} className="absolute top-2 right-2 opacity-60" />}
-                </button>
-              );
-            })}
-          </div>
-        </section>
+        {/* ── Scrollable Body ── */}
+        <div className="flex-1 overflow-y-auto px-4 pb-56">
 
-        {/* 📅 Section: Date Picker */}
-        <section className="mb-10">
-          <div className="flex items-center gap-2 mb-4">
-            <div className="h-1 w-6 rounded-full bg-amber-500" />
-            <h3 className="text-lg font-medium text-white/90">Choose Date</h3>
-          </div>
-          <div className="relative">
-            <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
-              <Calendar size={18} className="text-amber-500" />
+          {/* ── Services ── */}
+          <section className="mt-5 mb-6">
+            <h2 className="text-xl font-bold text-[#1A1A1A] mb-4"> {/* ✅ */}
+              Select the service{" "}
+              <span className="font-normal text-[#6B7280] text-base">you need</span> {/* ✅ */}
+            </h2>
+          <div className="flex gap-3 overflow-x-auto pb-1 -mx-1 px-1"
+               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
+              {services.map((svc) => {
+                const active = selectedService.name === svc.name;
+                return (
+                  <button
+                    key={svc.name}
+                    onClick={() => setSelectedService(svc)}
+                    className={`flex-shrink-0 w-40 rounded-2xl p-3 text-left transition-all duration-200 active:scale-95 ${
+                      active
+                        ? "bg-white shadow-md"
+                        : "bg-white hover:shadow-sm"
+                    }`}
+                    style={{
+                      border: active ? "2px solid #1E3A5F" : "1.5px solid #E5E7EB", // ✅
+                    }}
+                  >
+                    <div className="flex items-start justify-between mb-2">
+                      <span className="text-2xl leading-none">{svc.icon}</span>
+                      {svc.popular && (
+                        <span
+                          className="text-[9px] font-semibold leading-tight rounded-lg px-1.5 py-1 text-center"
+                          style={{ background: "#fef3c7", color: "#92400e" }}
+                        >
+                          Popular<br />Choice
+                        </span>
+                      )}
+                    </div>
+                    <p className="font-bold text-[#1A1A1A] text-[15px] mt-1">{svc.name}</p> {/* ✅ */}
+                    <p className="text-xs text-[#6B7280] mt-0.5"> {/* ✅ */}
+                      {svc.duration} · ₹{svc.price}
+                    </p>
+                    <div
+                      className={`mt-3 w-full py-2 rounded-xl text-sm font-bold text-center transition-all ${
+                        active
+                          ? "text-white"
+                          : "bg-white text-gray-700"
+                      }`}
+                      style={
+                        active
+                          ? { background: "#1E3A5F" }           // ✅
+                          : { border: "1.5px solid #E5E7EB" }   // ✅
+                      }
+                    >
+                      ₹{svc.price}
+                    </div>
+                  </button>
+                );
+              })}
             </div>
-            <input
-              type="date"
-              className="w-full bg-white/5 border border-white/10 px-12 py-4 rounded-2xl text-white outline-none focus:border-amber-500/50 focus:ring-2 focus:ring-amber-500/10 transition-all appearance-none"
-              value={selectedDate}
-              onChange={(e) => setSelectedDate(e.target.value)}
-            />
-          </div>
-        </section>
+          </section>
 
-        {/* ⏰ Section: Time Slots */}
-        <section className="mb-12">
-          <div className="flex items-center gap-2 mb-4">
-            <div className="h-1 w-6 rounded-full bg-amber-500" />
-            <h3 className="text-lg font-medium text-white/90">Available Slots</h3>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {timeSlots.map((time, index) => {
-              const isActive = selectedTime === time;
-              return (
-                <button
-                  key={index}
-                  onClick={() => setSelectedTime(time)}
-                  className={`flex items-center justify-center gap-2 py-3.5 rounded-2xl text-xs font-semibold tracking-wide transition-all ${
-                    isActive
-                      ? "bg-white text-black shadow-xl scale-[1.02]"
-                      : "bg-white/5 border border-white/10 text-white/60 hover:bg-white/10"
-                  }`}
+          {/* ── Pick a Date ── */}
+          <section className="mb-6">
+            <div className="flex items-center gap-2 mb-3">
+              <h2 className="text-lg font-bold text-[#1A1A1A]">Pick a date</h2> {/* ✅ */}
+              <span className="flex items-center gap-1 text-sm text-[#1E3A5F] font-medium"> {/* ✅ */}
+                <CheckCircle size={13} /> Today
+              </span>
+            </div>
+
+            <div
+              className="rounded-2xl p-3"
+              style={{ border: "1.5px solid #E5E7EB", background: "#fff" }} // ✅
+            >
+              <div className="flex gap-1 overflow-x-auto pb-1">
+                {dates.map((d, i) => {
+                  const active = selectedDateIdx === i;
+                  return (
+                    <button
+                      key={i}
+                      onClick={() => setSelectedDateIdx(i)}
+                      className={`flex-shrink-0 flex flex-col items-center px-3 py-2 rounded-xl transition-all ${
+                        active ? "bg-[#EEF2F7]" : "hover:bg-gray-50" // ✅
+                      }`}
+                      style={
+                        active
+                          ? { border: "1.5px solid #1E3A5F" }         // ✅
+                          : { border: "1.5px solid transparent" }
+                      }
+                    >
+                      <span className={`text-xs mb-0.5 ${active ? "text-[#1E3A5F] font-semibold" : "text-gray-400"}`}> {/* ✅ */}
+                        {d.day}
+                      </span>
+                      <span className={`text-base font-bold ${active ? "text-[#1E3A5F]" : "text-gray-800"}`}> {/* ✅ */}
+                        {d.date}
+                      </span>
+                      <div className="flex gap-0.5 mt-1">
+                        {d.dots.map((c, j) => (
+                          <span
+                            key={j}
+                            className="w-1.5 h-1.5 rounded-full inline-block"
+                            style={{ background: dotColors[c] }}
+                          />
+                        ))}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Legend */}
+              <div className="flex items-center gap-5 mt-3 px-1">
+                {[
+                  { color: "#1E3A5F", label: "Available" }, // ✅
+                  { color: "#9ca3af", label: "Limited"   },
+                  { color: "#d1d5db", label: "Full"      },
+                ].map(({ color, label }) => (
+                  <div key={label} className="flex items-center gap-1.5 text-xs text-[#6B7280]"> {/* ✅ */}
+                    <span className="w-2 h-2 rounded-full inline-block" style={{ background: color }} />
+                    {label}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* ── Time Slots ── */}
+          <section className="mb-6">
+            <h2 className="text-lg font-bold text-[#1A1A1A] mb-0.5">Choose a time slot</h2> {/* ✅ */}
+            <p className="text-sm text-[#6B7280] mb-4"> {/* ✅ */}
+              Next Available ·{" "}
+              <span className="text-[#1E3A5F] font-semibold">12:00 PM</span> {/* ✅ */}
+            </p>
+
+            <div
+              className="rounded-2xl px-4 py-4"
+              style={{ border: "1.5px solid #E5E7EB", background: "#fff" }} // ✅
+            >
+              {/* Morning */}
+              <p className="text-sm font-semibold text-[#6B7280] mb-3">Morning</p> {/* ✅ */}
+              <div className="grid grid-cols-4 gap-2 mb-5">
+                {morningSlots.map((time) => {
+                  const active = selectedTime === time;
+                  return (
+                    <button
+                      key={time}
+                      onClick={() => setSelectedTime(time)}
+                      className={`py-3 rounded-xl text-xs font-semibold transition-all active:scale-95 ${
+                        active
+                          ? "text-white shadow-sm"
+                          : "bg-white text-gray-700"
+                      }`}
+                      style={
+                        active
+                          ? { background: "#1E3A5F", border: "1.5px solid #1E3A5F" }   // ✅
+                          : { border: "1.5px solid #E5E7EB" }                           // ✅
+                      }
+                    >
+                      {active && "✓ "}
+                      {time}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Afternoon */}
+              <p className="text-sm font-semibold text-[#6B7280] mb-3">Afternoon</p> {/* ✅ */}
+              <div className="grid grid-cols-4 gap-2">
+                {afternoonSlots.map(({ time, available }) => {
+                  const active = selectedTime === time && available;
+                  return (
+                    <button
+                      key={time + "af"}
+                      disabled={!available}
+                      onClick={() => available && setSelectedTime(time)}
+                      className={`py-3 rounded-xl text-xs font-semibold transition-all active:scale-95 ${
+                        !available
+                          ? "text-gray-300 cursor-not-allowed bg-gray-50"
+                          : active
+                          ? "text-white shadow-sm"
+                          : "bg-white text-gray-700"
+                      }`}
+                      style={
+                        !available
+                          ? { border: "1.5px solid #f3f4f6" }
+                          : active
+                          ? { background: "#1E3A5F", border: "1.5px solid #1E3A5F" }  // ✅
+                          : { border: "1.5px solid #E5E7EB" }                          // ✅
+                      }
+                    >
+                      {!available ? `→ ${time}` : time}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+        {/* ── Sticky Bottom CTA ── */}
+        <div className="w-full flex justify-center mt-6">
+          <div
+            className="w-full max-w-lg bg-white px-4 pt-4 pb-8"
+            style={{
+              borderTop: "1.5px solid #E5E7EB",               // ✅
+              boxShadow: "0 -6px 24px rgba(0,0,0,0.07)",
+            }}
+          >
+            {/* Mini Summary */}
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-11 h-11 rounded-full flex items-center justify-center text-sm font-bold text-gray-700"
+                  style={{ background: "linear-gradient(135deg,#d1d5db,#9ca3af)" }}
                 >
-                  <Clock size={14} className={isActive ? "text-amber-600" : "text-white/30"} />
-                  {time}
-                </button>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* 💰 Summary & CTA */}
-        <div className="sticky bottom-6 left-0 right-0 z-50">
-          <div className="bg-[#16171d]/90 backdrop-blur-xl rounded-[2rem] p-6 border border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
-            <div className="flex items-center justify-between mb-6 px-2">
-              <div>
-                <p className="text-[10px] uppercase tracking-[0.2em] text-white/40 font-bold mb-1">Estimated Cost</p>
-                <div className="flex items-center text-2xl font-bold text-white">
-                   <IndianRupee size={20} className="text-amber-500" />
-                   <span>499</span>
+                  RK
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-[#1A1A1A]"> {/* ✅ */}
+                    {selectedService.name} · Raj Kumar
+                  </p>
+                  <p className="text-xs text-[#6B7280]">Apr 1, {selectedTime}</p> {/* ✅ */}
                 </div>
               </div>
-              <div className="text-right">
-                <p className="text-[10px] uppercase tracking-[0.2em] text-white/40 font-bold mb-1">Booking For</p>
-                <p className="text-sm font-medium text-amber-500/90 truncate max-w-[120px]">
-                  {selectedService || "No service"}
-                </p>
-              </div>
+              <span className="text-lg font-bold text-[#1A1A1A]">₹{selectedService.price}</span> {/* ✅ */}
             </div>
 
+            {/* Confirm Button */}
             <button
-              disabled={!selectedService || !selectedTime || !selectedDate}
-              className={`group relative w-full py-5 rounded-[1.5rem] font-bold tracking-wider overflow-hidden transition-all duration-500 ${
-                selectedService && selectedTime && selectedDate
-                  ? "bg-gradient-to-r from-amber-400 to-orange-500 text-black shadow-[0_10px_25px_rgba(245,158,11,0.4)] active:scale-[0.98]"
-                  : "bg-white/5 text-white/20 cursor-not-allowed grayscale"
-              }`}
+              onMouseEnter={() => setBtnHover(true)}   // ✅ hover effect
+              onMouseLeave={() => setBtnHover(false)}  // ✅ hover effect
               onClick={() => {
-                alert("Booking Confirmed 🎉");
-                onNavigate("home");
+                alert(`Booking confirmed! ✅\n${selectedService.name} at ${selectedTime}`);
+                onNavigate && onNavigate("home");
+              }}
+              className="w-full py-4 rounded-2xl text-base font-semibold text-white tracking-wide transition-all active:scale-[0.98]"
+              style={{
+                background: btnHover ? "#16324F" : "#1E3A5F",      // ✅ hover darker
+                boxShadow: "0 4px 18px rgba(30,58,95,0.35)",       // ✅
+                transition: "background 0.2s ease",
               }}
             >
-              <span className="relative z-10 flex items-center justify-center gap-2">
-                CONFIRM APPOINTMENT
-              </span>
-              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+              Confirm Booking
             </button>
           </div>
         </div>
-        
+
       </div>
     </div>
   );
