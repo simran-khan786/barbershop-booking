@@ -7,7 +7,6 @@ import {
   Search,
   Sparkles,
   Star,
-  // ── Profile panel icons ──
   User,
   Settings,
   Bell,
@@ -24,10 +23,6 @@ import {
 
 const FILTERS = ["All", "Near Me", "Hair Cut", "Beard", "Spa"];
 
-// ════════════════════════════════════════════
-// CHANGE 1 — ProfilePanel component
-// (paste this ABOVE HomePage function)
-// ════════════════════════════════════════════
 function ProfilePanel({ onClose, onLogout }) {
   const [darkMode, setDarkMode] = useState(true);
   const [visible, setVisible] = useState(false);
@@ -62,33 +57,32 @@ function ProfilePanel({ onClose, onLogout }) {
 
   return (
     <>
-      {/* Backdrop */}
       <div
         onClick={close}
         className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity duration-300"
         style={{ opacity: visible ? 1 : 0 }}
       />
 
-      {/* Side Panel — slides in from right */}
+      {/* 21. Profile Panel bg-white */}
       <div
-        className="fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col bg-[#0f1115] transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]"
+        className="fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col bg-white transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]"
         style={{
           transform: visible ? "translateX(0)" : "translateX(100%)",
           boxShadow: "-20px 0 60px rgba(0,0,0,0.7)",
         }}
       >
-        {/* Top bar */}
-        <div className="flex items-center justify-between border-b border-white/8 px-5 py-4">
+        {/* Top bar — border-[#E5E7EB] */}
+        <div className="flex items-center justify-between border-b border-[#E5E7EB] px-5 py-4">
           <button
             type="button"
-            className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/6 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
+            className="inline-flex items-center gap-2 rounded-xl border border-[#E5E7EB] bg-white px-4 py-2 text-sm font-semibold text-[#1A1A1A] transition hover:bg-[#F5F7FA]"
           >
             <Globe2 size={15} />
             Visit Store
           </button>
           <div className="flex items-center gap-3">
             <div className="relative cursor-pointer">
-              <Bell size={20} className="text-white/70" />
+              <Bell size={20} className="text-[#6B7280]" />
               <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[9px] font-bold text-white">
                 3
               </span>
@@ -96,47 +90,45 @@ function ProfilePanel({ onClose, onLogout }) {
             <img
               src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80"
               alt="avatar"
-              className="h-9 w-9 rounded-full object-cover border border-white/15"
+              className="h-9 w-9 rounded-full object-cover border border-[#E5E7EB]"
             />
           </div>
         </div>
 
-        {/* Scrollable body */}
         <div className="flex-1 overflow-y-auto">
-
           {/* User info */}
-          <div className="border-b border-white/8 px-6 py-6">
+          <div className="border-b border-[#E5E7EB] px-6 py-6">
             <div className="flex items-center gap-4">
               <img
                 src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80"
                 alt="Pranav"
-                className="h-16 w-16 rounded-full object-cover border-2 border-white/15"
+                className="h-16 w-16 rounded-full object-cover border-2 border-[#E5E7EB]"
               />
               <div>
-                <p className="text-lg font-bold text-white">Pranav</p>
-                <p className="text-sm text-white/50">pranav@email.com</p>
+                <p className="text-lg font-bold text-[#1A1A1A]">Pranav</p>
+                <p className="text-sm text-[#6B7280]">pranav@email.com</p>
               </div>
             </div>
             <button
               type="button"
-              className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/6 px-4 py-1.5 text-sm font-medium text-white/80 transition hover:bg-white/10"
+              className="mt-4 inline-flex items-center gap-2 rounded-full border border-[#E5E7EB] bg-white px-4 py-1.5 text-sm font-medium text-[#6B7280] transition hover:bg-[#F5F7FA]"
             >
               <span className="h-2 w-2 rounded-full bg-emerald-400 motion-safe:animate-pulse" />
               Online
-              <ChevronRight size={14} className="text-white/40" />
+              <ChevronRight size={14} className="text-[#6B7280]" />
             </button>
           </div>
 
           {/* Main menu */}
-          <div className="border-b border-white/8 px-3 py-3">
+          <div className="border-b border-[#E5E7EB] px-3 py-3">
             {menuItems.map(({ Icon, label, badge }) => (
               <button
                 key={label}
                 type="button"
-                className="flex w-full items-center justify-between rounded-xl px-4 py-3.5 text-sm text-white/75 transition duration-200 hover:bg-white/6 hover:text-white"
+                className="flex w-full items-center justify-between rounded-xl px-4 py-3.5 text-sm text-[#6B7280] transition duration-200 hover:bg-[#F5F7FA] hover:text-[#1A1A1A]"
               >
                 <span className="flex items-center gap-3">
-                  <Icon size={18} className="text-white/40" />
+                  <Icon size={18} className="text-[#6B7280]" />
                   {label}
                 </span>
                 <span className="flex items-center gap-2">
@@ -145,25 +137,25 @@ function ProfilePanel({ onClose, onLogout }) {
                       {badge}
                     </span>
                   )}
-                  <ChevronRight size={16} className="text-white/25" />
+                  <ChevronRight size={16} className="text-[#6B7280]" />
                 </span>
               </button>
             ))}
           </div>
 
           {/* Preferences */}
-          <div className="border-b border-white/8 px-3 py-3">
-            {/* Dark Mode */}
+          <div className="border-b border-[#E5E7EB] px-3 py-3">
             <div className="flex items-center justify-between rounded-xl px-4 py-3.5">
-              <span className="flex items-center gap-3 text-sm text-white/75">
-                <Moon size={18} className="text-white/40" />
+              <span className="flex items-center gap-3 text-sm text-[#6B7280]">
+                <Moon size={18} className="text-[#6B7280]" />
                 Dark Mode
               </span>
+              {/* 22. Dark Mode Toggle */}
               <button
                 onClick={() => setDarkMode((d) => !d)}
                 type="button"
                 className={`relative h-6 w-11 rounded-full transition-colors duration-300 ${
-                  darkMode ? "bg-blue-500" : "bg-white/20"
+                  darkMode ? "bg-[#1E3A5F]" : "bg-[#E5E7EB]"
                 }`}
               >
                 <span
@@ -174,34 +166,33 @@ function ProfilePanel({ onClose, onLogout }) {
               </button>
             </div>
 
-            {/* Language */}
             <button
               type="button"
-              className="flex w-full items-center justify-between rounded-xl px-4 py-3.5 text-sm text-white/75 transition hover:bg-white/6 hover:text-white"
+              className="flex w-full items-center justify-between rounded-xl px-4 py-3.5 text-sm text-[#6B7280] transition hover:bg-[#F5F7FA] hover:text-[#1A1A1A]"
             >
               <span className="flex items-center gap-3">
-                <Globe size={18} className="text-white/40" />
+                <Globe size={18} className="text-[#6B7280]" />
                 Language
               </span>
-              <span className="flex items-center gap-0.5 text-sm text-white/35">
+              <span className="flex items-center gap-0.5 text-sm text-[#6B7280]">
                 English <ChevronRight size={16} />
               </span>
             </button>
           </div>
 
           {/* Support */}
-          <div className="border-b border-white/8 px-3 py-3">
+          <div className="border-b border-[#E5E7EB] px-3 py-3">
             {supportItems.map(({ Icon, label }) => (
               <button
                 key={label}
                 type="button"
-                className="flex w-full items-center justify-between rounded-xl px-4 py-3.5 text-sm text-white/75 transition hover:bg-white/6 hover:text-white"
+                className="flex w-full items-center justify-between rounded-xl px-4 py-3.5 text-sm text-[#6B7280] transition hover:bg-[#F5F7FA] hover:text-[#1A1A1A]"
               >
                 <span className="flex items-center gap-3">
-                  <Icon size={18} className="text-white/40" />
+                  <Icon size={18} className="text-[#6B7280]" />
                   {label}
                 </span>
-                <ChevronRight size={16} className="text-white/25" />
+                <ChevronRight size={16} className="text-[#6B7280]" />
               </button>
             ))}
           </div>
@@ -217,16 +208,12 @@ function ProfilePanel({ onClose, onLogout }) {
               Logout
             </button>
           </div>
-
         </div>
       </div>
     </>
   );
 }
 
-// ════════════════════════════════════════════
-// HOME PAGE — your original code, 3 spots changed
-// ════════════════════════════════════════════
 function HomePage({ onNavigate, setSelectedSalon }) {
   const [activeFilter, setActiveFilter] = useState("All");
   const [query, setQuery] = useState("");
@@ -234,7 +221,7 @@ function HomePage({ onNavigate, setSelectedSalon }) {
   const [radius, setRadius] = useState(5);
   const [nearbyShops, setNearbyShops] = useState([]);
   const [userLocation, setUserLocation] = useState(null);
-  const [profileOpen, setProfileOpen] = useState(false); // ← CHANGE 2: new state
+  const [profileOpen, setProfileOpen] = useState(false);
 
   const normalizedQuery = query.trim().toLowerCase();
 
@@ -356,36 +343,39 @@ function HomePage({ onNavigate, setSelectedSalon }) {
   };
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top,#2d2217_0%,#17181c_24%,#0c0d10_60%,#090a0c_100%)] text-white">
+    <div className="min-h-screen bg-[#FFFFFF] text-[#1A1A1A]">
       <div className="w-full px-0 py-0">
-        <div className="min-h-screen w-full overflow-hidden border-x-0 border-y-0 border-white/10 bg-white/5 shadow-[0_20px_60px_-25px_rgba(0,0,0,0.65)] backdrop-blur-xl">
+        <div className="min-h-screen w-full overflow-hidden border-x-0 border-y-0 border-[#E5E7EB] bg-[#F5F7FA] shadow-[0_20px_60px_-25px_rgba(0,0,0,0.65)] backdrop-blur-xl">
           <div className="pointer-events-none absolute inset-0">
             <div className="absolute left-10 top-10 h-32 w-32 rounded-full bg-amber-400/10 blur-3xl motion-safe:animate-pulse" />
             <div className="absolute right-10 top-24 h-40 w-40 rounded-full bg-sky-400/10 blur-3xl motion-safe:animate-pulse" />
           </div>
 
           <div className="space-y-8 p-4 sm:p-6 lg:p-8 xl:p-10">
+
+            {/* Header section */}
             <section className="flex items-start justify-between gap-4">
               <div>
-                <p className="text-sm font-medium text-white/60">Good Morning</p>
-                <h1 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                <p className="text-sm font-medium text-[#6B7280]">Good Morning</p>
+                <h1 className="mt-2 text-3xl font-bold tracking-tight text-[#1A1A1A]">
                   Pranav
                 </h1>
                 <div className="mt-2 flex items-center gap-3">
                   <button
                     onClick={handleGetLocation}
-                    className="flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs text-white hover:bg-white/20 transition"
+                    className="flex items-center gap-2 rounded-full bg-white border border-[#E5E7EB] px-3 py-1 text-xs text-[#6B7280] hover:bg-[#F5F7FA] transition"
                   >
                     <MapPin size={14} />
                     {userLocation ? "📍 Location Enabled" : "Enable Location"}
                   </button>
                   {!userLocation && (
-                    <span className="text-xs text-white/50">
+                    <span className="text-xs text-[#6B7280]">
                       Turn on location to see nearby shops
                     </span>
                   )}
                 </div>
-                <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-amber-300/15 bg-amber-400/10 px-3 py-1.5 text-xs font-medium text-amber-200 shadow-[0_10px_30px_-18px_rgba(251,191,36,0.8)] transition duration-300 hover:border-amber-300/25 hover:bg-amber-400/15">
+                {/* 7. Premium Picks Badge */}
+                <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-[#D6E4FF] bg-[#EEF4FF] px-3 py-1.5 text-xs font-medium text-[#1E3A5F] shadow-[0_10px_30px_-18px_rgba(30,58,95,0.2)] transition duration-300">
                   <Sparkles size={14} />
                   Premium picks curated for you
                   <span className="h-2 w-2 rounded-full bg-emerald-400 motion-safe:animate-pulse" />
@@ -394,23 +384,17 @@ function HomePage({ onNavigate, setSelectedSalon }) {
 
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-4">
-                  {/* Notification Bell */}
                   <div className="relative cursor-pointer">
-                    <Bell size={22} className="text-white/80 hover:text-white transition" />
+                    <Bell size={22} className="text-[#6B7280] hover:text-[#1A1A1A] transition" />
                     <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[9px] font-bold text-white">
                       3
                     </span>
                   </div>
-
-                  {/* History Icon */}
-                  <Clock size={22} className="text-white/80 cursor-pointer hover:text-white transition" />
-
-
+                  <Clock size={22} className="text-[#6B7280] cursor-pointer hover:text-[#1A1A1A] transition" />
                 </div>
-                {/* CHANGE 3 — onClick added to open panel */}
                 <button
                   onClick={() => setProfileOpen(true)}
-                  className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/10 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.5)] transition duration-300 hover:-translate-y-0.5 hover:scale-[1.03] hover:border-amber-400/40 hover:bg-white/15 active:scale-[0.98]"
+                  className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[#E5E7EB] bg-white shadow-[0_10px_30px_-15px_rgba(0,0,0,0.15)] transition duration-300 hover:-translate-y-0.5 hover:scale-[1.03] hover:border-[#1E3A5F]/30 active:scale-[0.98]"
                   type="button"
                 >
                   <img
@@ -422,29 +406,34 @@ function HomePage({ onNavigate, setSelectedSalon }) {
               </div>
             </section>
 
+            {/* Search + Filter row */}
             <section className="flex flex-col gap-3 sm:flex-row">
               <button
-                className="inline-flex items-center justify-center rounded-2xl bg-[#111317] px-5 py-4 text-sm font-semibold text-white shadow-[0_16px_40px_-18px_rgba(0,0,0,0.7)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#171a20] active:scale-[0.98] sm:hidden"
+                className="inline-flex items-center justify-center rounded-2xl bg-[#1E3A5F] px-5 py-4 text-sm font-semibold text-white shadow-[0_16px_40px_-18px_rgba(0,0,0,0.15)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#16324F] active:scale-[0.98] sm:hidden"
                 onClick={handleLogout}
                 type="button"
               >
                 Logout
               </button>
-              <label className="group flex flex-1 items-center gap-3 rounded-2xl border border-white/10 bg-white/8 px-4 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] transition duration-300 hover:border-white/15 hover:bg-white/10 focus-within:-translate-y-0.5 focus-within:border-white/20 focus-within:bg-white/10 focus-within:shadow-[0_18px_45px_-28px_rgba(255,255,255,0.2)]">
+              {/* 2. Search Bar */}
+              <label className="group flex flex-1 items-center gap-3 rounded-2xl border border-[#E5E7EB] bg-white px-4 py-4 transition duration-300">
+                {/* 3. Search Icon */}
                 <Search
                   size={18}
-                  className="text-white/45 transition duration-300 group-hover:scale-110 group-focus-within:text-white/70"
+                  className="text-[#6B7280] transition duration-300 group-hover:scale-110"
                 />
+                {/* 4. Search Input */}
                 <input
-                  className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/40"
+                  className="w-full bg-transparent text-sm text-[#1A1A1A] outline-none placeholder:text-[#6B7280]"
                   onChange={(event) => setQuery(event.target.value)}
                   placeholder="Search salons, services..."
                   type="text"
                   value={query}
                 />
               </label>
+              {/* 1. Filters Button */}
               <button
-                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#111317] px-5 py-4 text-sm font-semibold text-white shadow-[0_16px_40px_-18px_rgba(0,0,0,0.7)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#171a20] hover:shadow-[0_20px_50px_-18px_rgba(0,0,0,0.75)] active:scale-[0.98]"
+                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#1E3A5F] px-5 py-4 text-sm font-semibold text-white shadow-[0_16px_40px_-18px_rgba(0,0,0,0.15)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#16324F] active:scale-[0.98]"
                 type="button"
               >
                 <Filter size={18} />
@@ -452,6 +441,7 @@ function HomePage({ onNavigate, setSelectedSalon }) {
               </button>
             </section>
 
+            {/* 5 & 6. Filter chips */}
             <section className="overflow-x-auto">
               <div className="flex min-w-max gap-3">
                 {FILTERS.map((filter) => {
@@ -461,8 +451,8 @@ function HomePage({ onNavigate, setSelectedSalon }) {
                       key={filter}
                       className={`rounded-2xl px-5 py-2.5 text-sm font-medium transition duration-300 active:scale-[0.98] ${
                         isActive
-                          ? "bg-[#111317] text-white shadow-[0_12px_30px_-16px_rgba(0,0,0,0.7)]"
-                          : "border border-white/12 bg-white/5 text-white/70 hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/8 hover:text-white"
+                          ? "bg-[#1E3A5F] text-white shadow-[0_12px_30px_-16px_rgba(0,0,0,0.15)]"
+                          : "border border-[#E5E7EB] bg-white text-[#6B7280] hover:-translate-y-0.5 hover:bg-[#F5F7FA]"
                       }`}
                       onClick={() => setActiveFilter(filter)}
                       type="button"
@@ -474,26 +464,28 @@ function HomePage({ onNavigate, setSelectedSalon }) {
               </div>
             </section>
 
+            {/* Featured Salons */}
             <section>
               <div className="mb-4 flex items-center justify-between">
                 <div>
-                  <h2 className="text-xl font-semibold text-white sm:text-2xl">
+                  <h2 className="text-xl font-semibold text-[#1A1A1A]">
                     Featured Salons
                   </h2>
-                  <p className="mt-1 text-sm text-white/55">
+                  <p className="mt-1 text-sm text-[#6B7280]">
                     Handpicked salons with premium experience
                   </p>
                 </div>
-                <button className="text-sm font-medium text-white/65 transition hover:text-white">
+                <button className="text-sm font-medium text-[#6B7280] transition hover:text-[#1A1A1A]">
                   See all
                 </button>
               </div>
 
               <div className="flex gap-4 overflow-x-auto pb-2">
                 {featuredSalons.map((salon) => (
+                  /* 8. Featured Salon Card */
                   <article
                     key={salon.id}
-                    className="group min-w-[280px] max-w-[320px] flex-1 rounded-2xl border border-white/10 bg-white/6 shadow-[0_18px_45px_-25px_rgba(0,0,0,0.75)] transition duration-300 hover:-translate-y-1.5 hover:border-white/15 hover:shadow-[0_24px_60px_-25px_rgba(0,0,0,0.8)]"
+                    className="group min-w-[280px] max-w-[320px] flex-1 rounded-2xl border border-[#E5E7EB] bg-white shadow-[0_18px_45px_-25px_rgba(0,0,0,0.1)] transition duration-300 hover:-translate-y-1.5 hover:border-[#1E3A5F]/20 hover:shadow-[0_24px_60px_-25px_rgba(0,0,0,0.15)]"
                   >
                     <div className="relative h-52 overflow-hidden rounded-t-2xl">
                       <img
@@ -518,22 +510,25 @@ function HomePage({ onNavigate, setSelectedSalon }) {
 
                     <div className="space-y-4 p-4">
                       <div className="flex items-center justify-between">
-                        <div className="inline-flex items-center gap-1.5 text-sm font-medium text-amber-300">
-                          <Star size={15} className="fill-amber-300 text-amber-300" />
+                        {/* 9. Featured Card Rating */}
+                        <div className="inline-flex items-center gap-1.5 text-sm font-medium text-[#1E3A5F]">
+                          <Star size={15} className="fill-[#1E3A5F] text-[#1E3A5F]" />
                           {salon.rating}
                         </div>
+                        {/* 10. Featured Card Book Now */}
                         <button
                           onClick={() => handleBookAppointment(salon)}
-                          className="bg-gradient-to-r from-[#f7a23b] to-[#b85a21] px-4 py-1.5 rounded-full text-xs font-semibold text-black hover:scale-105 transition"
+                          className="bg-[#1E3A5F] px-4 py-1.5 rounded-full text-xs font-semibold text-white hover:bg-[#16324F] hover:scale-105 transition"
                         >
                           Book Now
                         </button>
                       </div>
                       <div className="flex flex-wrap gap-2">
                         {salon.services.map((service) => (
+                          /* 11. Service Tags (Featured) */
                           <span
                             key={service}
-                            className="rounded-full border border-white/10 bg-white/6 px-3 py-1 text-xs text-white/70 transition duration-300 hover:border-white/20 hover:bg-white/10 hover:text-white"
+                            className="rounded-full border border-[#E5E7EB] bg-[#F5F7FA] px-3 py-1 text-xs text-[#6B7280] transition duration-300 hover:border-[#1E3A5F]/20 hover:bg-[#EEF4FF] hover:text-[#1E3A5F]"
                           >
                             {service}
                           </span>
@@ -544,15 +539,16 @@ function HomePage({ onNavigate, setSelectedSalon }) {
                 ))}
 
                 {featuredSalons.length === 0 && (
-                  <div className="flex min-h-[260px] w-full items-center justify-center rounded-2xl border border-dashed border-white/10 bg-white/5 text-sm text-white/55">
+                  <div className="flex min-h-[260px] w-full items-center justify-center rounded-2xl border border-dashed border-[#E5E7EB] bg-white text-sm text-[#6B7280]">
                     No featured salons match your search.
                   </div>
                 )}
               </div>
 
+              {/* 12. Main Book Appointment Button */}
               <div className="mt-5 flex justify-center sm:justify-start">
                 <button
-                  className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-[#f7a23b] via-[#de7b2f] to-[#b85a21] px-6 py-3 text-sm font-semibold text-[#111] shadow-[0_18px_40px_-18px_rgba(247,162,59,0.55)] transition duration-300 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-[0_24px_50px_-18px_rgba(247,162,59,0.65)] active:scale-[0.98]"
+                  className="inline-flex items-center justify-center rounded-2xl bg-[#1E3A5F] px-6 py-3 text-sm font-semibold text-white hover:bg-[#16324F] shadow-[0_18px_40px_-18px_rgba(30,58,95,0.4)] transition duration-300 hover:-translate-y-1 hover:scale-[1.01] active:scale-[0.98]"
                   onClick={handleBookAppointment}
                   type="button"
                 >
@@ -561,18 +557,23 @@ function HomePage({ onNavigate, setSelectedSalon }) {
               </div>
             </section>
 
+            {/* Nearby section */}
             <section>
               <div className="mb-4 flex items-center justify-between">
                 <div>
-                  <h2 className="text-xl font-semibold text-white sm:text-2xl">Nearby</h2>
-                  <p className="mt-1 text-sm text-white/55">Best options around your location</p>
+                  <h2 className="text-xl font-semibold text-[#1A1A1A]">Nearby</h2>
+                  {/* 13. Nearby Description */}
+                  <p className="mt-1 text-sm text-[#6B7280]">Best options around your location</p>
+                  {/* 14. Radius Buttons */}
                   <div className="flex gap-2 mb-4">
                     {[5, 10, 15, 20].map((r) => (
                       <button
                         key={r}
                         onClick={() => setRadius(r)}
                         className={`px-3 py-1 rounded-full text-xs ${
-                          radius === r ? "bg-white text-black" : "bg-white/10 text-white"
+                          radius === r
+                            ? "bg-[#1E3A5F] text-white"
+                            : "bg-white border border-[#E5E7EB] text-[#6B7280]"
                         }`}
                       >
                         {r} km
@@ -580,16 +581,17 @@ function HomePage({ onNavigate, setSelectedSalon }) {
                     ))}
                   </div>
                 </div>
-                <button className="text-sm font-medium text-white/65 transition hover:text-white">
+                <button className="text-sm font-medium text-[#6B7280] transition hover:text-[#1A1A1A]">
                   See all
                 </button>
               </div>
 
               <div className="space-y-4">
                 {nearbySalons.map((salon) => (
+                  /* 15. Nearby Card Container */
                   <article
                     key={salon.id}
-                    className="group flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/6 p-4 shadow-[0_18px_45px_-25px_rgba(0,0,0,0.75)] transition duration-300 hover:-translate-y-1 hover:border-white/15 hover:shadow-[0_24px_60px_-28px_rgba(0,0,0,0.8)] sm:flex-row sm:items-center"
+                    className="group flex flex-col gap-4 rounded-2xl border border-[#E5E7EB] bg-white p-4 shadow-[0_18px_45px_-25px_rgba(0,0,0,0.08)] transition duration-300 hover:-translate-y-1 hover:border-[#1E3A5F]/20 hover:shadow-[0_24px_60px_-28px_rgba(0,0,0,0.12)] sm:flex-row sm:items-center"
                   >
                     <div className="relative h-24 overflow-hidden rounded-2xl sm:h-28 sm:w-32">
                       <img
@@ -603,27 +605,31 @@ function HomePage({ onNavigate, setSelectedSalon }) {
                     <div className="min-w-0 flex-1">
                       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                         <div className="min-w-0">
-                          <h3 className="truncate text-lg font-semibold text-white">{salon.name}</h3>
-                          <div className="mt-1 flex flex-wrap items-center gap-2 text-sm text-white/60">
+                          {/* 16. Nearby Card Title */}
+                          <h3 className="truncate text-lg font-semibold text-[#1A1A1A]">{salon.name}</h3>
+                          {/* 17. Nearby Card Info Row */}
+                          <div className="mt-1 flex flex-wrap items-center gap-2 text-sm text-[#6B7280]">
                             <span className="inline-flex items-center gap-1">
                               <MapPin size={14} />
                               {salon.location}
                             </span>
                             <span>• {salon.distance}</span>
-                            <span className="inline-flex items-center gap-1 text-amber-300">
-                              <Star size={14} className="fill-amber-300 text-amber-300" />
+                            {/* 18. Nearby Rating */}
+                            <span className="inline-flex items-center gap-1 text-[#1E3A5F]">
+                              <Star size={14} className="fill-[#1E3A5F] text-[#1E3A5F]" />
                               {salon.rating}
                             </span>
                             <span>• {salon.priceRange}</span>
                           </div>
                         </div>
                         <div className="flex flex-col items-center gap-2">
-                          <div className="rounded-full bg-white/8 p-2 text-white/70">
+                          <div className="rounded-full bg-[#F5F7FA] p-2 text-[#6B7280]">
                             <ArrowRight size={18} />
                           </div>
+                          {/* 20. Nearby Book Now */}
                           <button
                             onClick={() => handleBookAppointment(salon)}
-                            className="text-xs bg-[#f7a23b] text-black px-3 py-1 rounded-full hover:scale-105 transition"
+                            className="text-xs bg-[#1E3A5F] text-white px-3 py-1 rounded-full hover:bg-[#16324F] hover:scale-105 transition"
                           >
                             Book Now
                           </button>
@@ -632,9 +638,10 @@ function HomePage({ onNavigate, setSelectedSalon }) {
 
                       <div className="mt-3 flex flex-wrap gap-2">
                         {salon.services.map((service) => (
+                          /* 19. Nearby Service Tags */
                           <span
                             key={service}
-                            className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-[#101216] px-3 py-1 text-xs text-white/70 transition duration-300 hover:border-white/20 hover:bg-[#15181d] hover:text-white"
+                            className="inline-flex items-center gap-1 rounded-full border border-[#E5E7EB] bg-[#F5F7FA] px-3 py-1 text-xs text-[#6B7280] transition duration-300 hover:border-[#1E3A5F]/20 hover:bg-[#EEF4FF] hover:text-[#1E3A5F]"
                           >
                             <Scissors size={12} />
                             {service}
@@ -645,7 +652,7 @@ function HomePage({ onNavigate, setSelectedSalon }) {
 
                     <button
                       onClick={() => handleBookAppointment(salon)}
-                      className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#f7a23b] px-4 py-3 text-sm font-medium text-black sm:hidden"
+                      className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#1E3A5F] text-white hover:bg-[#16324F] px-4 py-3 text-sm font-medium sm:hidden"
                     >
                       Book Now
                     </button>
@@ -653,21 +660,21 @@ function HomePage({ onNavigate, setSelectedSalon }) {
                 ))}
 
                 {!userLocation ? (
-                  <div className="flex min-h-[160px] items-center justify-center rounded-2xl border border-dashed border-white/10 bg-white/5 text-sm text-white/55">
+                  <div className="flex min-h-[160px] items-center justify-center rounded-2xl border border-dashed border-[#E5E7EB] bg-white text-sm text-[#6B7280]">
                     Enable location to see nearby salons 📍
                   </div>
                 ) : nearbySalons.length === 0 ? (
-                  <div className="flex min-h-[160px] items-center justify-center rounded-2xl border border-dashed border-white/10 bg-white/5 text-sm text-white/55">
+                  <div className="flex min-h-[160px] items-center justify-center rounded-2xl border border-dashed border-[#E5E7EB] bg-white text-sm text-[#6B7280]">
                     No nearby salons found in your area
                   </div>
                 ) : null}
               </div>
             </section>
+
           </div>
         </div>
       </div>
 
-      {/* CHANGE 4 — ProfilePanel render, just before closing </div> */}
       {profileOpen && (
         <ProfilePanel
           onClose={() => setProfileOpen(false)}
