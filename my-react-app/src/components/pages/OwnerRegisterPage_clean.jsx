@@ -11,41 +11,23 @@ function RegisterPage({ onNavigate }) {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleRegister = async () => {
-
     if (password !== confirmPassword) {
       toast.error("Passwords do not match");
       return;
     }
-
     try {
       const res = await fetch("http://localhost:8080/api/auth/register/owner", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          email,
-          password,
-          role: "OWNER" // ✅ FIX: ALWAYS OWNER
-        })
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ firstName, lastName, email, password, role: "OWNER" })
       });
-
       const data = await res.json();
-
       if (res.ok) {
         toast.success("Owner Registered Successfully ✅");
-
-        // ⏳ delay before redirect
-        setTimeout(() => {
-          onNavigate("login");
-        }, 2500);
-
+        setTimeout(() => { onNavigate("login"); }, 2500);
       } else {
         alert(data);
       }
-
     } catch (err) {
       console.error(err);
       alert("Server Error ❌");
@@ -53,22 +35,25 @@ function RegisterPage({ onNavigate }) {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#0f0f12]">
-      <div className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-[#2a1c12] opacity-40 blur-3xl" />
-      <div className="pointer-events-none absolute right-[-140px] top-20 h-[28rem] w-[28rem] rounded-full bg-[#1a2130] opacity-35 blur-[150px]" />
-      <div className="pointer-events-none absolute bottom-[-120px] left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-[#3b2a1a] opacity-35 blur-[140px]" />
+    <div className="relative min-h-screen overflow-hidden bg-[#F5F7FA]">
+      {/* Orbs */}
+      <div className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-[#EEF4FF] opacity-60 blur-3xl" />
+      <div className="pointer-events-none absolute right-[-140px] top-20 h-[28rem] w-[28rem] rounded-full bg-[#D6E4FF] opacity-40 blur-[150px]" />
+      <div className="pointer-events-none absolute bottom-[-120px] left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-[#EEF4FF] opacity-40 blur-[140px]" />
 
       <div className="mx-auto flex min-h-screen w-full max-w-5xl flex-col px-6 py-12">
+
+        {/* Top bar */}
         <div className="flex items-center justify-between">
           <button
-            className="text-sm font-semibold text-white/70 transition hover:text-[var(--accent)]"
+            className="text-sm font-semibold text-[#6B7280] transition hover:text-[#1E3A5F]"
             onClick={() => onNavigate("landing")}
             type="button"
           >
             &larr; Back to home
           </button>
           <button
-            className="rounded-full border border-white/20 bg-white/5 px-4 py-2 text-xs font-semibold text-white/80 shadow-sm transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            className="rounded-full border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#6B7280] shadow-sm transition hover:border-[#1E3A5F] hover:text-[#1E3A5F]"
             onClick={() => onNavigate("login")}
             type="button"
           >
@@ -78,40 +63,42 @@ function RegisterPage({ onNavigate }) {
 
         <div className="mt-12 flex flex-1 items-center justify-center">
           <div className="w-full max-w-xl text-center">
-            <p className="text-xs uppercase tracking-[0.3em] text-[var(--accent)]">
+
+            <p className="text-xs uppercase tracking-[0.3em] text-[#1E3A5F]">
               Create account
             </p>
-            <h1 className="font-display mt-4 text-4xl leading-tight tracking-tight text-white md:text-5xl md:leading-tight">
+            <h1 className="font-display mt-4 text-4xl leading-tight tracking-tight text-[#1A1A1A] md:text-5xl md:leading-tight">
               Create your account
             </h1>
-            <p className="mt-4 text-sm text-white/70 md:text-base">
+            <p className="mt-4 text-sm text-[#6B7280] md:text-base">
               Enter your details to get started.
             </p>
 
-            <div className="mt-8 rounded-[28px] border border-white/10 bg-[#1c1d22] p-6 text-left shadow-[0_30px_80px_-40px_rgba(0,0,0,0.6)] md:p-8">
+            {/* Card */}
+            <div className="mt-8 rounded-[28px] border border-[#E5E7EB] bg-white p-6 text-left shadow-[0_30px_80px_-40px_rgba(0,0,0,0.1)] md:p-8">
               <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
 
                 <div className="grid gap-4 md:grid-cols-2">
                   <div>
-                    <label className="text-xs uppercase tracking-[0.2em] text-white/60">
+                    <label className="text-xs uppercase tracking-[0.2em] text-[#6B7280]">
                       First name
                     </label>
                     <input
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
-                      className="mt-2 w-full rounded-xl border border-white/10 bg-[#111111] px-4 py-3 text-sm text-white shadow-sm outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 placeholder:text-white/40"
+                      className="mt-2 w-full rounded-xl border border-[#E5E7EB] bg-[#F5F7FA] px-4 py-3 text-sm text-[#1A1A1A] shadow-sm outline-none transition focus:border-[#1E3A5F] focus:ring-2 focus:ring-[#1E3A5F]/20 placeholder:text-[#6B7280]"
                       placeholder="First name"
                       type="text"
                     />
                   </div>
                   <div>
-                    <label className="text-xs uppercase tracking-[0.2em] text-white/60">
+                    <label className="text-xs uppercase tracking-[0.2em] text-[#6B7280]">
                       Last name
                     </label>
                     <input
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
-                      className="mt-2 w-full rounded-xl border border-white/10 bg-[#111111] px-4 py-3 text-sm text-white shadow-sm outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 placeholder:text-white/40"
+                      className="mt-2 w-full rounded-xl border border-[#E5E7EB] bg-[#F5F7FA] px-4 py-3 text-sm text-[#1A1A1A] shadow-sm outline-none transition focus:border-[#1E3A5F] focus:ring-2 focus:ring-[#1E3A5F]/20 placeholder:text-[#6B7280]"
                       placeholder="Last name"
                       type="text"
                     />
@@ -119,52 +106,52 @@ function RegisterPage({ onNavigate }) {
                 </div>
 
                 <div>
-                  <label className="text-xs uppercase tracking-[0.2em] text-white/60">
+                  <label className="text-xs uppercase tracking-[0.2em] text-[#6B7280]">
                     Email
                   </label>
                   <input
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="mt-2 w-full rounded-xl border border-white/10 bg-[#111111] px-4 py-3 text-sm text-white shadow-sm outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 placeholder:text-white/40"
+                    className="mt-2 w-full rounded-xl border border-[#E5E7EB] bg-[#F5F7FA] px-4 py-3 text-sm text-[#1A1A1A] shadow-sm outline-none transition focus:border-[#1E3A5F] focus:ring-2 focus:ring-[#1E3A5F]/20 placeholder:text-[#6B7280]"
                     placeholder="you@example.com"
                     type="email"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs uppercase tracking-[0.2em] text-white/60">
+                  <label className="text-xs uppercase tracking-[0.2em] text-[#6B7280]">
                     Phone number
                   </label>
                   <input
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="mt-2 w-full rounded-xl border border-white/10 bg-[#111111] px-4 py-3 text-sm text-white shadow-sm outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 placeholder:text-white/40"
+                    className="mt-2 w-full rounded-xl border border-[#E5E7EB] bg-[#F5F7FA] px-4 py-3 text-sm text-[#1A1A1A] shadow-sm outline-none transition focus:border-[#1E3A5F] focus:ring-2 focus:ring-[#1E3A5F]/20 placeholder:text-[#6B7280]"
                     placeholder="+91 98765 43210"
                     type="tel"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs uppercase tracking-[0.2em] text-white/60">
+                  <label className="text-xs uppercase tracking-[0.2em] text-[#6B7280]">
                     Password
                   </label>
                   <input
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="mt-2 w-full rounded-xl border border-white/10 bg-[#111111] px-4 py-3 text-sm text-white shadow-sm outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 placeholder:text-white/40"
+                    className="mt-2 w-full rounded-xl border border-[#E5E7EB] bg-[#F5F7FA] px-4 py-3 text-sm text-[#1A1A1A] shadow-sm outline-none transition focus:border-[#1E3A5F] focus:ring-2 focus:ring-[#1E3A5F]/20 placeholder:text-[#6B7280]"
                     placeholder="Create a password"
                     type="password"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs uppercase tracking-[0.2em] text-white/60">
+                  <label className="text-xs uppercase tracking-[0.2em] text-[#6B7280]">
                     Confirm password
                   </label>
                   <input
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="mt-2 w-full rounded-xl border border-white/10 bg-[#111111] px-4 py-3 text-sm text-white shadow-sm outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 placeholder:text-white/40"
+                    className="mt-2 w-full rounded-xl border border-[#E5E7EB] bg-[#F5F7FA] px-4 py-3 text-sm text-[#1A1A1A] shadow-sm outline-none transition focus:border-[#1E3A5F] focus:ring-2 focus:ring-[#1E3A5F]/20 placeholder:text-[#6B7280]"
                     placeholder="Repeat password"
                     type="password"
                   />
@@ -172,7 +159,7 @@ function RegisterPage({ onNavigate }) {
 
                 <button
                   onClick={handleRegister}
-                  className="w-full rounded-full bg-gradient-to-r from-[#c24c1a] via-[#e26a2c] to-[#f7a23b] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[#f7a23b]/30 transition-transform duration-300 ease-out hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f7a23b]/40"
+                  className="w-full rounded-full bg-[#1E3A5F] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[#1E3A5F]/20 transition-transform duration-300 ease-out hover:bg-[#16324F] hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A5F]/40"
                   type="button"
                 >
                   Create account
